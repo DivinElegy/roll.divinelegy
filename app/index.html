@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="DivinElegy" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>DivinElegy - Rock n Roll</title>
+        
+        <!-- Styles -->
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="Controllers/Upload/style.css"/>
+        <!-- end -->
+        
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+        -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
+        
+        <!-- Controllers -->
+        <script src="Controllers/Index/index.js"></script>
+        <script src="Controllers/Upload/upload.js"></script>
+        <!-- End -->
+        
+        <!-- good luck cameron -->
+        <script src="divinelegy.js"></script>  
+    </head>
+    <body>
+        <ul class="menu">
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/upload">Upload</a></li>
+        </ul>
+
+        <div ng-view>
+            <!-- extreme hard rock for DivinElegy gets loaded in here. -->
+        </div>
+
+        <div>Angular seed app: v<span app-version></span></div>
+    </body>
+</html>
