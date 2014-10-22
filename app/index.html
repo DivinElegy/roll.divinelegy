@@ -19,7 +19,10 @@
 
         <!-- components -->
         <script src="components/hello/hello-service.js"></script>
+        <script src="components/user/user-service.js"></script>
         <script src="components/menu/menu-controller.js"></script>
+        <script src="components/menu/menu-directive.js"></script>
+        <script src="components/userMenu/userMenu-directive.js"></script>
         
         <!-- pages -->
         <script src="pages/index/index.js"></script>
@@ -30,11 +33,13 @@
         <script src="divinelegy.js"></script>  
     </head>
     <body>
-        <div ng-include="'components/menu/menu.html'"></div>
+        <div menu></div>
 
         <div ng-view>
             <!-- extreme hard rock for DivinElegy gets loaded in here. -->
         </div>
+        
+        <div user-menu></div>
 
         <!-- <div>Angular seed app: v<span app-version></span></div> -->
     </body>

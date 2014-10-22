@@ -8,9 +8,9 @@ factory("HelloService", ['$http', function($http)
     
     hello.services.facebook.scope.hometown = 'user_hometown';
     
-    hello.isLoggedIn = function(network)
+    hello.isLoggedIn = function()
     {
-        var session = window.hello(network).getAuthResponse();
+        var session = window.hello('facebook').getAuthResponse();
         var current_time = (new Date()).getTime() / 1000;
         return session && session.access_token && session.expires > current_time;
     };
@@ -28,9 +28,7 @@ factory("HelloService", ['$http', function($http)
         // get the short term token
         hello('facebook').login( {scope: "hometown"} ).then(function() {
             var facebookObj = hello.utils.store('facebook');
-        
-            console.log(JSON.stringify({token: facebookObj.access_token}));
-        
+                
             // send to 
             $http({
                 url: "http://rock.divinelegy.meeples/user/auth",
@@ -40,8 +38,15 @@ factory("HelloService", ['$http', function($http)
             success(function (data)
             {
                 hello.setAccessToken(data.token, data.expires);
-                console.log(data);
             });
+        });
+    };
+    
+    hello.getFacebookId = function()
+    {
+        return hello('facebook').api('/me').then(function(r)
+        {
+            return r.id;
         });
     };
     

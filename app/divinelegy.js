@@ -4,11 +4,13 @@
 angular.module('DivinElegy', [
   'ngRoute',
   'DivinElegy.components.hello',
+  'DivinElegy.components.user',
   'DivinElegy.components.menu',
+  'DivinElegy.components.userMenu',
   'DivinElegy.pages.index',
   'DivinElegy.pages.upload'
 ]).
-        
+
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.
     when('/',
@@ -23,7 +25,7 @@ config(['$routeProvider', function($routeProvider) {
     }).
     otherwise({redirectTo: '/'});
 }]).
-    
+        
 run(['HelloService', function(HelloService)
 {
     HelloService.init({

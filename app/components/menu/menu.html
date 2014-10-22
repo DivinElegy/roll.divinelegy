@@ -2,8 +2,8 @@
     <li><a href="#/">Home</a></li>
     <li><a href="#/upload">Upload</a></li>
     <li>
-        {{greeting}}<a ng-if="loggedIn" href="#" ng-click="doLogout()">{{logoutLink}}</a>
-        <a ng-if="loggedOut" href="#" ng-click="doLogin()">{{loginLink}}</a>
+        {{welcomeMessage}}
+        <a href="#" ng-if="loggedIn" ng-click="doLogout()">logout</a>
+        <a href="#" ng-if="!loggedIn" ng-click="doLogin()">login</a>
     </li>
-
 </ul>
