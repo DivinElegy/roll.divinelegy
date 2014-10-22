@@ -10,12 +10,13 @@ directive('userMenu', ['HelloService', function(HelloService)
             HelloService.on('auth.login', function()
             {
                 scope.showMenu = true;
+                scope.$$phase || scope.$apply();
             });
             
             HelloService.on('auth.logout', function()
             {
                 scope.showMenu = false;
-                scope.$apply();
+                scope.$$phase || scope.$apply();
             });
         }
     };

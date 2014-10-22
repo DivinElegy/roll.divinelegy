@@ -8,21 +8,21 @@ directive('menu', ['HelloService', 'UserService', function(HelloService, UserSer
     return {
         templateUrl: 'components/menu/menu.html',
         link: function(scope, element){
-            HelloService.on('auth.login', function()
+            HelloService.on('auth.login.userReady', function()
             {
                 UserService.getCurrentUser().then(function(user)
                 {
                     scope.welcomeMessage = 'Welcome, ' + user.displayName;
                     scope.loggedIn = true;
+                    scope.$$phase || scope.$apply();
                 });
-                UserService.getCurrentUser();
             });
             
             HelloService.on('auth.logout', function()
             {
                 scope.welcomeMessage = '';
                 scope.loggedIn = false;
-                scope.$apply();
+                scope.$$phase || scope.$apply();
             });
         }
     };

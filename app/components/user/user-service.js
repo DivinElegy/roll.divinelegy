@@ -19,7 +19,7 @@ factory("UserService", ['$http', '$q', 'HelloService', function($http, $q, Hello
         }
 
         $http({
-            url: "http://rock.divinelegy.meeples/user/" + facebookId,
+            url: "http://rock.divinelegy.dev/user/" + facebookId,
             method: "GET"
         }).
         success(function (data)
