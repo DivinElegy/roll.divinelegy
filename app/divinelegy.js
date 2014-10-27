@@ -4,11 +4,11 @@
 angular.module('DivinElegy', [
   'ngRoute',
   'DivinElegy.components.hello',
-  'DivinElegy.components.user',
   'DivinElegy.components.menu',
   'DivinElegy.components.userMenu',
   'DivinElegy.pages.index',
-  'DivinElegy.pages.upload'
+  'DivinElegy.pages.upload',
+  'DivinElegy.pages.simfiles'
 ]).
 
 config(['$routeProvider', function($routeProvider) {
@@ -21,7 +21,12 @@ config(['$routeProvider', function($routeProvider) {
     when('/upload',
     {
         templateUrl: 'pages/upload/upload.html',
-        controller: 'UploadController' 
+        controller: 'UploadController'
+    }).
+    when('/simfiles',
+    {
+        templateUrl: 'pages/simfiles/simfiles.html',
+        controller: 'SimfileController'
     }).
     otherwise({redirectTo: '/'});
 }]).

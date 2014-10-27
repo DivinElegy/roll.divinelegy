@@ -1,0 +1,14 @@
+<input type="text" ng-model="artistFilterKeyword" placeholder="artist..."/>
+<input type="text" ng-model="titleFilterKeyword" placeholder="title..."/>
+<table>
+    <thead>
+        <tr><th colspan="4">Slamfiles</th></tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="simfile in simfileList | filter: artistFilter | filter: titleFilter ">
+            <td>{{$index + 1}}</td>
+            <td>{{simfile.artist}}</td>
+            <td>{{simfile.title}}</td>
+        </tr>
+    </tbody>
+</table>
