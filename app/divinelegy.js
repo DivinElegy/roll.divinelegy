@@ -11,7 +11,7 @@ angular.module('DivinElegy', [
   'DivinElegy.pages.simfiles'
 ]).
 
-config(['$routeProvider', function($routeProvider) {
+config(['$routeProvider', '$locationProvider', function($routeProvider) {
     $routeProvider.
     when('/',
     {
@@ -21,7 +21,12 @@ config(['$routeProvider', function($routeProvider) {
     when('/upload',
     {
         templateUrl: 'pages/upload/upload.html',
-        controller: 'UploadController'
+        controller: 'UploadController',
+        resolve: {
+            loginRequired : function(HelloService) {
+                HelloService.redirectIfNotLoggedIn();
+            }
+        }
     }).
     when('/simfiles',
     {

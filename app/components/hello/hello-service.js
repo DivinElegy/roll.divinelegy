@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module("DivinElegy.components.hello", []).
+angular.module("DivinElegy.components.hello", ['DivinElegy.components.config']).
       
-factory("HelloService", ['$http', function($http)
+factory("HelloService", ['rockEndpoint', '$http', '$location', '$q', function(rockEndpoint, $http, $location, $q)
 {
     var hello = window.hello;
     
@@ -12,7 +12,22 @@ factory("HelloService", ['$http', function($http)
     {
         var session = window.hello('facebook').getAuthResponse();
         var current_time = (new Date()).getTime() / 1000;
-        return session && session.access_token && session.expires > current_time;
+        return session && session.access_token && session.expires > current_time && hello.utils.store('facebook');
+    };
+    
+    hello.redirectIfNotLoggedIn = function()
+    {
+        var deferred = $q.defer();
+        
+        if(! this.isLoggedIn())
+        {
+            deferred.reject();
+            $location.path('/');
+        } else {
+            deferred.resolve();
+        }
+        
+        return deferred.promise;
     };
     
     hello.setAccessToken = function(token, expires)
@@ -21,7 +36,7 @@ factory("HelloService", ['$http', function($http)
         facebookObj.access_token = token;
         facebookObj.expires = expires;
         window.hello.utils.store('facebook', facebookObj);
-    }
+    };
     
     hello.facebookLogin = function()
     {
@@ -35,7 +50,7 @@ factory("HelloService", ['$http', function($http)
 
         // send to 
         $http({
-            url: "http://rock.divinelegy.dev/user/auth",
+            url: rockEndpoint + "user/auth",
             method: "GET",
             params: {token: facebookObj.access_token}
         }).

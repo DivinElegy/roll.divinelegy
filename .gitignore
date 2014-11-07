@@ -7,3 +7,5 @@ tmp
 .idea
 npm-debug.log
 nbproject
+/app/components/config/*
+!/app/components/config/*.example

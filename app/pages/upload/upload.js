@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module("DivinElegy.pages.upload", ['angularFileUpload'])
+angular.module("DivinElegy.pages.upload", ['angularFileUpload', 'DivinElegy.components.config'])
 
-.controller("UploadController", ['$scope', 'FileUploader', function($scope, FileUploader)
+.controller("UploadController", ['rockEndpoint', '$scope', 'FileUploader', function(rockEndpoint, $scope, FileUploader)
 {
     var uploader = $scope.uploader = new FileUploader(
     {
-        url: 'http://rock.divinelegy.meeples/simfiles/upload'
+        url: rockEndpoint + 'simfiles/upload'
     });
     
     uploader.filters.push(

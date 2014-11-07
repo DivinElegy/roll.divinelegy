@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module("DivinElegy.components.simfiles", []).
+angular.module("DivinElegy.components.simfiles", ['DivinElegy.components.config']).
       
-factory("SimfileService", ['$http', function($http)
+factory("SimfileService", ['rockEndpoint', '$http', function(rockEndpoint, $http)
 {
     var simfileAPI = {};
     
     simfileAPI.getSimfiles = function()
     {
         return $http({
-            url: "http://rock.divinelegy.dev/simfiles/",
+            url: rockEndpoint + "simfiles/",
             method: "GET"
         });
     };

@@ -1,0 +1,4 @@
+'use strict';
+
+angular.module("DivinElegy.components.config", []).      
+value("rockEndpoint", 'http://rock.divinelegy.meeples/');

@@ -1,14 +1,73 @@
 <input type="text" ng-model="artistFilterKeyword" placeholder="artist..."/>
 <input type="text" ng-model="titleFilterKeyword" placeholder="title..."/>
-<table>
-    <thead>
-        <tr><th colspan="4">Slamfiles</th></tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="simfile in simfileList | filter: artistFilter | filter: titleFilter ">
-            <td>{{$index + 1}}</td>
-            <td>{{simfile.artist}}</td>
-            <td>{{simfile.title}}</td>
-        </tr>
-    </tbody>
-</table>
+<select ng-model="difficultyFilterKeyword">
+    <option value="Any" selected="selected">Any</option>
+    <option value="Novice">Novice</option>
+    <option value="Easy">Easy</option>
+    <option value="Medium">Medium</option>
+    <option value="Hard">Hard</option>
+    <option value="Expert">Expert</option>
+</select>
+<input type="text" ng-model="ratingFilterKeyword" placeholder="rating..."/>
+<input type="text" ng-model="stepArtistFilterKeyword" placeholder="step artist..."/>
+FG changes: <input type="checkbox" ng-model="fgChangesFilterKeyword">
+BG changes: <input type="checkbox" ng-model="bgChangesFilterKeyword">
+BPM changes: <input type="checkbox" ng-model="bpmChangesFilterKeyword">
+
+<ul class="simfileList">
+    <li class="simfileListing" ng-class="{active: isListingActive($index)}" ng-repeat="simfile in simfileList | filter: artistFilter
+                                                                                                              | filter: titleFilter
+                                                                                                              | filter: stepsFilter
+                                                                                                              | filter: fgChangesFilter
+                                                                                                              | filter: bgChangesFilter
+                                                                                                              | filter: bpmChangesFilter
+    ">
+        <a ng-click="openListing($index)">{{simfile.title}}</a>
+        <div class="content" ng-show="isListingActive($index)">
+            <img ng-src="{{rockEndpoint}}{{simfile.banner}}" alt="swage" />
+            <table>
+                <tr>
+                    <th>Title:</th>
+                    <td>{{simfile.title}}</td>
+                </tr>
+                <tr>
+                    <th>Artist:</th>
+                    <td>{{simfile.artist}}</td>
+                </tr>
+                <tr ng-if="simfile.steps.single">
+                    <th>Steps-single:</th>
+                    <td>
+                        <ul>
+                            <li ng-repeat="stepchart in simfile.steps.single">
+                                <div class="difficulty {{stepchart.difficulty}}">{{stepchart.rating}} ({{stepchart.artist}})</div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr ng-if="simfile.steps.double">
+                    <th>Steps-double:</th>
+                    <td>
+                        <ul>
+                            <li ng-repeat="stepchart in simfile.steps.double">
+                                <span>{{stepchart.difficulty}} {{stepchart.rating}}</span>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>BPMChanges:</th>
+                    <td>{{simfile.bpmChanges}}</td>
+                </tr>
+                <tr>
+                    <th>BGChanges:</th>
+                    <td>{{simfile.bgChanges}}</td>
+                </tr>
+                <tr>
+                    <th>FGChanges:</th>
+                    <td>{{simfile.fgChanges}}</td>
+                </tr>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+    </li>
+</ul>

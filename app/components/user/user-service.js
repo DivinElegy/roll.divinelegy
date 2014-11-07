@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module("DivinElegy.components.user", ['DivinElegy.components.hello']).
+angular.module("DivinElegy.components.user", ['DivinElegy.components.config', 'DivinElegy.components.hello']).
       
-factory("UserService", ['$http', '$q', 'HelloService', function($http, $q, HelloService)
+factory("UserService", ['rockEndpoint', '$http', '$q', 'HelloService', function(rockEndpoint, $http, $q, HelloService)
 {
     var UserService = {};
     UserService.userCache = {};
@@ -19,7 +19,7 @@ factory("UserService", ['$http', '$q', 'HelloService', function($http, $q, Hello
         }
 
         $http({
-            url: "http://rock.divinelegy.dev/user/" + facebookId,
+            url: rockEndpoint + "user/" + facebookId,
             method: "GET"
         }).
         success(function (data)

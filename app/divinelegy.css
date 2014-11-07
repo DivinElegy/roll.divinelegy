@@ -1,0 +1,117 @@
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+}
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
+body {
+    background: url('./images/background.png');
+    background-color: #0C141C;
+    background-repeat:repeat-x;
+    background-position:top;
+    background-attachment:fixed;
+    color: #fff;
+    font-size: 10px;
+    font-family: verdana;
+    line-height: normal;
+}
+
+.panel {
+    background: #1C2C3C;
+    border: 3px solid #000000;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    color: #fff;
+    padding: 7px;
+}
+
+#navigation,
+#controlPanel {
+    margin-top: 100px;
+}
+
+#post {
+    margin-top: 56px;
+}
+
+.simfileListing {
+    background: rgba(0,0,0,0.25);
+    border: 2px solid rgba(0,0,0,0.3);
+    margin: 2px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 5px;
+}
+
+.simfileListing img {
+    float: left;
+    background: #000;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    max-width: 344px;
+    margin-right:5px;
+}
+
+.simfileListing a {
+    font-weight: bold;
+    color: #FFB122;
+    text-decoration: none;
+}
+
+.simfileListing a:hover {
+    text-decoration: underline;
+}
+
+.simfileListing th {
+    font-weight: bold;
+}
+
+.simfileListing.active {
+    background: rgba(0,0,0,0.5);
+    border: 2px solid rgba(0,0,0,1);
+}
+
+.simfileListing .difficulty {
+    padding: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    display: inline-block;
+}
+
+.difficulty.Expert {
+    background: #359cd7;
+    border: 2px solid #03407f;
+}
+
+.difficulty.Hard {
+    background: #c62d2f;
+    border: 2px solid #8b0100;
+}
+
+.difficulty.Medium {
+    background: #fefa15;
+    border: 2px solid #889100;
+}
+
+.difficulty.Easy {
+    background: #0af90a;
+    border: 2px solid #009901;
+}
+
+.difficulty.Novice {
+    background: #d390dd;
+    border: 2px solid #700893;
+}

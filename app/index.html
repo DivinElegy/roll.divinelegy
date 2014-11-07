@@ -6,7 +6,9 @@
         <title>DivinElegy - Rock n Roll</title>
         
         <!-- Styles -->
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="reset.css"/>
+        <link rel="stylesheet" href="grid.css"/>
+        <link rel="stylesheet" href="divinelegy.css"/>
         <!-- end -->
         
         <!-- In production use:
@@ -18,6 +20,7 @@
         <script class="pre" src="bower_components/hello/dist/hello.all.js"></script>
 
         <!-- components -->
+        <script src="components/config/rockEndpoint-value.js"></script>
         <script src="components/hello/hello-service.js"></script>
         <script src="components/user/user-service.js"></script>
         <script src="components/menu/menu-controller.js"></script>
@@ -35,14 +38,21 @@
         <script src="divinelegy.js"></script>  
     </head>
     <body>
-        <div menu></div>
+        <div class="container_15">
+            <div class="grid_3">
+                <div id="navigation" class="panel" menu></div>
+            </div>
 
-        <div ng-view>
-            <!-- extreme hard rock for DivinElegy gets loaded in here. -->
+            <div class="grid_9">
+                <div id="post" class="panel" ng-view>
+                    <!-- extreme hard rock for DivinElegy gets loaded in here. -->
+                </div>
+            </div>
+
+            <div class="grid_3">
+                <div id="controlPanel" class="panel" user-menu></div>
+            </div>
         </div>
-        
-        <div user-menu></div>
-
         <!-- <div>Angular seed app: v<span app-version></span></div> -->
     </body>
 </html>
