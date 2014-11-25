@@ -1,9 +1,12 @@
 'use strict';
 
-angular.module("DivinElegy.pages.upload", ['angularFileUpload', 'DivinElegy.components.config'])
+angular.module("DivinElegy.pages.upload", ['angularFileUpload', 'DivinElegy.components.config', 'DivinElegy.components.hello'])
 
-.controller("UploadController", ['rockEndpoint', '$scope', 'FileUploader', function(rockEndpoint, $scope, FileUploader)
+.controller("UploadController", ['rockEndpoint', 'HelloService', '$scope', 'FileUploader', function(rockEndpoint, HelloService, $scope, FileUploader)
 {
+    
+    $scope.token = HelloService.getAccessToken();
+    
     var uploader = $scope.uploader = new FileUploader(
     {
         url: rockEndpoint + 'simfiles/upload'

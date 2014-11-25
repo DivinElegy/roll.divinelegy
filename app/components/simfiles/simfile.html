@@ -1,0 +1,44 @@
+<img ng-src="{{rockEndpoint}}{{banner}}" alt="swage" />
+<table>
+    <tr>
+        <th>Title:</th>
+        <td>{{title}}</td>
+    </tr>
+    <tr>
+        <th>Artist:</th>
+        <td>{{artist}}</td>
+    </tr>
+    <tr ng-if="steps.single">
+        <th>Steps-single:</th>
+        <td>
+            <ul>
+                <li ng-repeat="stepchart in steps.single">
+                    <div class="difficulty {{stepchart.difficulty}}">{{stepchart.rating}} ({{stepchart.artist}})</div>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr ng-if="steps.double">
+        <th>Steps-double:</th>
+        <td>
+            <ul>
+                <li ng-repeat="stepchart in steps.double">
+                    <span>{{stepchart.difficulty}} {{stepchart.rating}}</span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th>BPMChanges:</th>
+        <td>{{bpmChanges}}</td>
+    </tr>
+    <tr>
+        <th>BGChanges:</th>
+        <td>{{bgChanges}}</td>
+    </tr>
+    <tr>
+        <th>FGChanges:</th>
+        <td>{{fgChanges}}</td>
+    </tr>
+</table>
+<div class="clearfix"></div>

@@ -122,8 +122,13 @@ angular.module("DivinElegy.pages.simfiles", ["DivinElegy.components.simfiles","D
             return !$scope.bpmChangesFilterKeyword || simfile.bpmChanges === 'Yes';
     };
     
-    SimfileService.getSimfiles().success(function(response)
+    SimfileService.getSimfiles().then(function(simfiles)
     {
-        $scope.simfileList = response;
+        $scope.simfileList = simfiles;
+    });
+    
+    SimfileService.getPacks().then(function(packs)
+    {
+        $scope.packList = packs;
     });
 }]);

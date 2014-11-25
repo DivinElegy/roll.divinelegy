@@ -3,9 +3,10 @@
 // Declare app level module which depends on views, and components
 angular.module('DivinElegy', [
   'ngRoute',
-  'DivinElegy.components.hello',
+  //'DivinElegy.components.hello',
   'DivinElegy.components.menu',
   'DivinElegy.components.userMenu',
+  'DivinElegy.components.simfiles',
   'DivinElegy.pages.index',
   'DivinElegy.pages.upload',
   'DivinElegy.pages.simfiles'

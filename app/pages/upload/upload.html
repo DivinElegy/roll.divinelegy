@@ -7,6 +7,7 @@
 <br />
 <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
 <input type="file" nv-file-select="" uploader="uploader" multiple />
+<input type="hidden" name="token" value="{{token}}" />
 <h2>The queue. Length: {{ uploader.queue.length}}</h2>
 <ul>
     <li ng-repeat="item in uploader.queue">

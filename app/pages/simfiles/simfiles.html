@@ -24,50 +24,16 @@ BPM changes: <input type="checkbox" ng-model="bpmChangesFilterKeyword">
     ">
         <a ng-click="openListing($index)">{{simfile.title}}</a>
         <div class="content" ng-show="isListingActive($index)">
-            <img ng-src="{{rockEndpoint}}{{simfile.banner}}" alt="swage" />
-            <table>
-                <tr>
-                    <th>Title:</th>
-                    <td>{{simfile.title}}</td>
-                </tr>
-                <tr>
-                    <th>Artist:</th>
-                    <td>{{simfile.artist}}</td>
-                </tr>
-                <tr ng-if="simfile.steps.single">
-                    <th>Steps-single:</th>
-                    <td>
-                        <ul>
-                            <li ng-repeat="stepchart in simfile.steps.single">
-                                <div class="difficulty {{stepchart.difficulty}}">{{stepchart.rating}} ({{stepchart.artist}})</div>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr ng-if="simfile.steps.double">
-                    <th>Steps-double:</th>
-                    <td>
-                        <ul>
-                            <li ng-repeat="stepchart in simfile.steps.double">
-                                <span>{{stepchart.difficulty}} {{stepchart.rating}}</span>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <th>BPMChanges:</th>
-                    <td>{{simfile.bpmChanges}}</td>
-                </tr>
-                <tr>
-                    <th>BGChanges:</th>
-                    <td>{{simfile.bgChanges}}</td>
-                </tr>
-                <tr>
-                    <th>FGChanges:</th>
-                    <td>{{simfile.fgChanges}}</td>
-                </tr>
-            </table>
-            <div class="clearfix"></div>
+            <simfile rock-endpoint="rockEndpoint"
+                     simfile="simfile"
+                     banner="simfile.banner"
+                     title="simfile.title"
+                     artist="simfile.artist"
+                     steps="simfile.steps"
+                     bpm-changes="simfile.bpmChanges"
+                     bg-changes="simfile.bgChanges"
+                     fg-changes="simfile.fgChanges"
+            />
         </div>
     </li>
 </ul>

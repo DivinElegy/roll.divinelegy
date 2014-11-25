@@ -38,6 +38,11 @@ factory("HelloService", ['rockEndpoint', '$http', '$location', '$q', function(ro
         window.hello.utils.store('facebook', facebookObj);
     };
     
+    hello.getAccessToken = function()
+    {
+        return hello.utils.store('facebook').access_token;
+    };
+    
     hello.facebookLogin = function()
     {
         // get the short term token
