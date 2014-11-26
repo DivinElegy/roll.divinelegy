@@ -18,11 +18,6 @@ directive('simfile', function()
             bgChanges: '=',
             fgChanges: '='
         },
-        templateUrl: 'components/simfiles/simfile.html',
-        link: function(scope, element, attrs){
-            
-            console.log(scope.simfile);
-            console.log(scope.bpmChanges);
-        }
+        templateUrl: 'components/simfiles/simfile.html'
     };
 });

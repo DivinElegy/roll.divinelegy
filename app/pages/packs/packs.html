@@ -1,0 +1,61 @@
+<input type="text" ng-model="packTitleFilterKeyword" placeholder="pack title..."/>
+<input type="text" ng-model="artistFilterKeyword" placeholder="artist..."/>
+<input type="text" ng-model="songTitleFilterKeyword" placeholder="song title..."/>
+<select ng-model="difficultyFilterKeyword">
+    <option value="Any" selected="selected">Any</option>
+    <option value="Novice">Novice</option>
+    <option value="Easy">Easy</option>
+    <option value="Medium">Medium</option>
+    <option value="Hard">Hard</option>
+    <option value="Expert">Expert</option>
+</select>
+<input type="text" ng-model="ratingFilterKeyword" placeholder="rating..."/>
+<input type="text" ng-model="stepArtistFilterKeyword" placeholder="step artist..."/>
+FG changes: <input type="checkbox" ng-model="fgChangesFilterKeyword">
+BG changes: <input type="checkbox" ng-model="bgChangesFilterKeyword">
+BPM changes: <input type="checkbox" ng-model="bpmChangesFilterKeyword">
+
+<ul class="simfileList">
+    <li class="simfileListing" ng-class="{active: isListingActive($index)}" ng-repeat="pack in packList | filter: packTitleFilter
+                                                                                                        | filter: artistFilter
+                                                                                                        | filter: songTitleFilter
+                                                                                                        | filter: stepsFilter
+                                                                                                        | filter: fgChangesFilter
+                                                                                                        | filter: bgChangesFilter
+                                                                                                        | filter: bpmChangesFilter
+    " ng-init="contributors=getContributors(pack.contributors)">
+        <a ng-click="openListing($index)">{{pack.title}}</a>
+        <div class="content" ng-show="isListingActive($index)">
+            <img ng-src="{{rockEndpoint}}{{pack.banner}}" alt="swage" />
+            <table>
+                <tr>
+                    <th>Title:</th>
+                    <td>{{pack.title}}</td>
+                </tr>
+                <tr>
+                    <th>Contributors:</th>
+                    <td>{{contributors}}</td>
+                </tr>
+            </table>
+            <div class="clearfix"></div>
+            <h1>Charts</h1>
+            <ul>
+                <li class="simfileListing" ng-repeat="simfile in pack.simfiles" ng-class="{active: isListingActive(getSimfileListingIndex(pack.title,$index))}">
+                    <a ng-click="openListing(getSimfileListingIndex(pack.title,$index))">{{simfile.title}}</a>
+                    <div class="content" ng-show="isListingActive(getSimfileListingIndex(pack.title,$index))">
+                        <simfile rock-endpoint="rockEndpoint"
+                                 simfile="simfile"
+                                 banner="simfile.banner"
+                                 title="simfile.title"
+                                 artist="simfile.artist"
+                                 steps="simfile.steps"
+                                 bpm-changes="simfile.bpmChanges"
+                                 bg-changes="simfile.bgChanges"
+                                 fg-changes="simfile.fgChanges"
+                        />
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>

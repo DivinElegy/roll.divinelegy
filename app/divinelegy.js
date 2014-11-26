@@ -9,7 +9,8 @@ angular.module('DivinElegy', [
   'DivinElegy.components.simfiles',
   'DivinElegy.pages.index',
   'DivinElegy.pages.upload',
-  'DivinElegy.pages.simfiles'
+  'DivinElegy.pages.simfiles',
+  'DivinElegy.pages.packs'
 ]).
 
 config(['$routeProvider', '$locationProvider', function($routeProvider) {
@@ -33,6 +34,11 @@ config(['$routeProvider', '$locationProvider', function($routeProvider) {
     {
         templateUrl: 'pages/simfiles/simfiles.html',
         controller: 'SimfileController'
+    }).
+    when('/packs',
+    {
+        templateUrl: 'pages/packs/packs.html',
+        controller: 'PackController'
     }).
     otherwise({redirectTo: '/'});
 }]).

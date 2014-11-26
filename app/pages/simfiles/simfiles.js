@@ -126,9 +126,4 @@ angular.module("DivinElegy.pages.simfiles", ["DivinElegy.components.simfiles","D
     {
         $scope.simfileList = simfiles;
     });
-    
-    SimfileService.getPacks().then(function(packs)
-    {
-        $scope.packList = packs;
-    });
 }]);
