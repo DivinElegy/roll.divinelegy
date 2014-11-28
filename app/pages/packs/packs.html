@@ -36,6 +36,16 @@ BPM changes: <input type="checkbox" ng-model="bpmChangesFilterKeyword">
                     <th>Contributors:</th>
                     <td>{{contributors}}</td>
                 </tr>
+                <tr ng-if="pack.mirrors">
+                    <th>Downloads:</th>
+                    <td>
+                        <ul>
+                            <li class="mirrorListing" ng-repeat="mirror in pack.mirrors">
+                                <a href="{{mirror.uri}}">{{mirror.source}}{{$last ? '' : ', '}}</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
             </table>
             <div class="clearfix"></div>
             <h1>Charts</h1>
