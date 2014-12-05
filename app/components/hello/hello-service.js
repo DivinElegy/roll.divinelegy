@@ -74,6 +74,11 @@ factory("HelloService", ['rockEndpoint', '$http', '$location', '$q', function(ro
         
     hello.getFacebookId = function()
     {
+        if(!this.isLoggedIn())
+        {
+            return null;
+        }
+        
         return hello('facebook').api('/me').then(function(r)
         {
             return r.id;

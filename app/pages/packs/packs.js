@@ -39,9 +39,15 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     };
 
     $scope.downloadFromDe = function(pack)
-    {        
-        UserService.getCurrentUser().then(function(user)
+    {    
+        if(!UserService.getCurrentUser())
         {
+            $rootScope.$broadcast('message.error', 'You need to be logged in to download from DivinElegy.'); 
+            return;
+        }
+        
+        UserService.getCurrentUser().then(function(user)
+        {            
             var size = filesizeBytes(pack.size);
             var quotaRemaining = filesizeBytes(user.quotaRemaining);
             

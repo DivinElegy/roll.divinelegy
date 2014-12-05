@@ -121,13 +121,13 @@ body {
     margin-right:5px;
 }
 
-.simfileListing a {
+a {
     font-weight: bold;
     color: #FFB122;
     text-decoration: none;
 }
 
-.simfileListing a:hover {
+a:hover {
     text-decoration: underline;
 }
 

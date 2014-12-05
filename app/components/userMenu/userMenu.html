@@ -2,8 +2,8 @@
     <ul>
         <li>
             {{welcomeMessage}}
-            <a href="#" ng-if="loggedIn" ng-click="doLogout()">logout</a>
-            <a href="#" ng-if="!loggedIn" ng-click="doLogin()">login</a>
+            <a class="de-link" ng-if="loggedIn" ng-click="doLogout()">logout</a>
+            <a class="de-link" ng-if="!loggedIn" ng-click="doLogin()">login</a>
         </li>
     </ul>
     <div ng-if="loggedIn">

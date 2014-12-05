@@ -46,6 +46,11 @@ factory("UserService", ['$rootScope', 'rockEndpoint', '$http', '$q', 'HelloServi
     {           
         if (!this.facebookId)
         {
+            if(!HelloService.getFacebookId())
+            {
+                return null;
+            }
+            
             return HelloService.getFacebookId().then(function(fbId)
                 {
                     //cant use this here bc scope or something
@@ -69,6 +74,12 @@ factory("UserService", ['$rootScope', 'rockEndpoint', '$http', '$q', 'HelloServi
         } else {
             this.getUser(this.facebookId, true);
         }
+    };
+    
+    UserService.flushCache = function()
+    {
+        this.userCache = {};
+        this.facebookId = null;
     };
          
     return UserService;

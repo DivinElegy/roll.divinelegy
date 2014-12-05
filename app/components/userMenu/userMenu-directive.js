@@ -21,7 +21,6 @@ directive('userMenu', ['HelloService', 'UserService', function(HelloService, Use
             {
                 UserService.getCurrentUser().then(function(user)
                 {
-                    console.log(user);
                     scope.welcomeMessage = 'Welcome, ' + user.displayName;
                     scope.quota = user.quota;
                     scope.quotaRemaining = user.quotaRemaining;
@@ -32,6 +31,7 @@ directive('userMenu', ['HelloService', 'UserService', function(HelloService, Use
             
             HelloService.on('auth.logout', function()
             {
+                UserService.flushCache();
                 scope.welcomeMessage = '';
                 scope.loggedIn = false;
                 scope.$$phase || scope.$apply();
