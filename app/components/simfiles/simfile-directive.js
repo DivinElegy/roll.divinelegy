@@ -45,11 +45,17 @@ directive('simfile', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint
 
             $scope.downloadFromDe = function(simfile)
             {      
+                if(!UserService.getCurrentUser())
+                {
+                    $rootScope.$broadcast('message.error', 'You need to be logged in to download from DivinElegy.'); 
+                    return;
+                }
+                
                 UserService.getCurrentUser().then(function(user)
                 {
                     var size = filesizeBytes(simfile.size);
                     var quotaRemaining = filesizeBytes(user.quotaRemaining);
-                console.log('here');
+
                     if(quotaRemaining < size)
                     {
                         $rootScope.$broadcast('message.error', 'Sorry, you do not have enough quota to download that file. Quota resets at 00:00 UTC+0'); 
