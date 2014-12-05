@@ -17,6 +17,7 @@ directive('simfile', function()
             bpmChanges: '=',
             bgChanges: '=',
             fgChanges: '=',
+            size: '=',
             download: '='
         },
         templateUrl: 'components/simfiles/simfile.html'

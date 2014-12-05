@@ -40,7 +40,7 @@ factory("HelloService", ['rockEndpoint', '$http', '$location', '$q', function(ro
     
     hello.getAccessToken = function()
     {
-        return hello.utils.store('facebook').access_token;
+        return this.isLoggedIn() ? hello.utils.store('facebook').access_token : null;
     };
     
     hello.facebookLogin = function()

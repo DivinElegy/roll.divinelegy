@@ -1,15 +1,30 @@
-<div id="usermenu" ng-if="showMenu">
+<div id="usermenu">
     <ul>
-        <li>Public Profile</li>
-        <li>Account Settings</li>
+        <li>
+            {{welcomeMessage}}
+            <a href="#" ng-if="loggedIn" ng-click="doLogout()">logout</a>
+            <a href="#" ng-if="!loggedIn" ng-click="doLogin()">login</a>
+        </li>
     </ul>
-    <ul>
-        <li>My Uploads</li>
-        <li>My Favourite Files</li>
-        <li>My Favourite Uploaders</li>
-        <li>My Followers</li>
-    </ul>
-    <ul>
-        <li>All Members</li>
-    </ul>
+    <div ng-if="loggedIn">
+        <br />
+        <ul>
+            <li>Public Profile</li>
+            <li>Account Settings</li>
+        </ul>
+        <br />
+        <ul>
+            <li>My Uploads</li>
+            <li>My Favourite Files</li>
+            <li>My Favourite Uploaders</li>
+            <li>My Followers</li>
+        </ul>
+        <br />
+        <ul>
+            <li>All Members</li>
+        </ul>
+        <br />
+        <h1>My Quota</h1>
+        {{quotaRemaining}} of {{quota}} remaining
+    </div>
 </div>

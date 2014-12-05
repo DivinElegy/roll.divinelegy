@@ -17,17 +17,19 @@
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/angular-file-upload/angular-file-upload.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script class="pre" src="bower_components/hello/dist/hello.all.js"></script>
 
         <!-- components -->
         <script src="components/config/rockEndpoint-value.js"></script>
         <script src="components/hello/hello-service.js"></script>
         <script src="components/user/user-service.js"></script>
-        <script src="components/menu/menu-controller.js"></script>
         <script src="components/menu/menu-directive.js"></script>
         <script src="components/userMenu/userMenu-directive.js"></script>
         <script src="components/simfiles/simfiles-service.js"></script>
         <script src="components/simfiles/simfile-directive.js"></script>
+        <script src="components/messages/messagebox-controller.js"></script>
+        <script src="components/messages/messagebox-directive.js"></script>
         
         <!-- pages -->
         <script src="pages/index/index.js"></script>
@@ -40,18 +42,27 @@
         <script src="divinelegy.js"></script>  
     </head>
     <body>
-        <div class="container_15">
-            <div class="grid_3">
+        <div class="container">
+            <div class="box_full">
+                <div id="message-box" ng-controller="MessageBoxController" ng-class="{'info' : messageType == 'info',
+                                                                                      'warning' : messageType == 'warning',
+                                                                                      'error' : messageType == 'error',
+                                                                                      'success' : messageType == 'success',
+                                                                                      'hidden' : hidden}">
+                    <span message="message"></span> <span class="ok" ng-click="hide()">OK</span>
+                </div>
+            </div>
+            <div class="box_side alpha">
                 <div id="navigation" class="panel" menu></div>
             </div>
 
-            <div class="grid_9">
+            <div class="box_main">
                 <div id="post" class="panel" ng-view>
                     <!-- extreme hard rock for DivinElegy gets loaded in here. -->
                 </div>
             </div>
 
-            <div class="grid_3">
+            <div class="box_side omega">
                 <div id="controlPanel" class="panel" user-menu></div>
             </div>
         </div>

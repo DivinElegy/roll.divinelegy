@@ -7,6 +7,7 @@ angular.module('DivinElegy', [
   'DivinElegy.components.menu',
   'DivinElegy.components.userMenu',
   'DivinElegy.components.simfiles',
+  'DivinElegy.components.messages',
   'DivinElegy.pages.index',
   'DivinElegy.pages.upload',
   'DivinElegy.pages.simfiles',
@@ -39,6 +40,14 @@ config(['$routeProvider', '$locationProvider', function($routeProvider) {
     {
         templateUrl: 'pages/packs/packs.html',
         controller: 'PackController'
+    }).
+    when('/packs/test',
+    {
+        resolve: {
+            load: function () {
+                console.log("hello");
+            }
+        }
     }).
     otherwise({redirectTo: '/'});
 }]).

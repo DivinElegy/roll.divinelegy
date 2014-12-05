@@ -36,11 +36,68 @@ body {
 
 #navigation,
 #controlPanel {
-    margin-top: 100px;
+    margin-top: 60px;
 }
 
 #post {
-    margin-top: 56px;
+    margin-top: 16px;
+}
+
+#message-box {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 40px;
+    padding: 10px;
+    background-color: #bde5f8;
+    color: #3d7cb2;
+    border: 3px solid #3d7cb2;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+#message-box .ok {
+    display: inline-block;
+    text-align: center;
+    width: 32px;
+    border: 2px solid black;
+    padding: 2px;
+    margin-left: 10px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.de-link,
+#message-box .ok:hover {
+    cursor: pointer;
+}
+
+#message-box.hidden {
+    visibility: hidden;
+}
+
+#message-box.info {
+    color: #3d7cb2;
+    border: 3px solid #3d7cb2;
+}
+
+#message-box.success {
+    background-color: #dff2bf;
+    color: #a5c084;
+    border: 2px solid #a5c084;
+}
+
+#message-box.warning {
+    background-color: #feefb3;
+    color: #c9aa73;
+    border: 2px solid #c9aa73;
+}
+
+#message-box.error {
+    background-color: #ffbaba;
+    color: #d20000;
+    border: 2px solid #d20000;
 }
 
 .simfileListing {

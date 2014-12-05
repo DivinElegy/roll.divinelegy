@@ -2,16 +2,16 @@
 
 angular.module("DivinElegy.components.user", ['DivinElegy.components.config', 'DivinElegy.components.hello']).
       
-factory("UserService", ['rockEndpoint', '$http', '$q', 'HelloService', function(rockEndpoint, $http, $q, HelloService)
+factory("UserService", ['$rootScope', 'rockEndpoint', '$http', '$q', 'HelloService', function($rootScope, rockEndpoint, $http, $q, HelloService)
 {
     var UserService = {};
     UserService.userCache = {};
     
-    UserService.getUser = function(facebookId)
+    UserService.getUser = function(facebookId, skipCache)
     {
         var deferred = $q.defer();
-        
-        if(this.userCache[facebookId])
+        var token = HelloService.getAccessToken();
+        if(this.userCache[facebookId] && !skipCache)
         {
             this.userCache[facebookId]['fromCache'] = true;
             deferred.resolve(this.userCache[facebookId]);
@@ -20,15 +20,25 @@ factory("UserService", ['rockEndpoint', '$http', '$q', 'HelloService', function(
 
         $http({
             url: rockEndpoint + "user/" + facebookId,
-            method: "GET"
+            method: "GET",
+            params: {token: token}
         }).
         success(function (data)
         {
             UserService.userCache[facebookId] = data;
             deferred.resolve(data);
+            //XXX: kinda hacky, but this way everything that has stuff pulled out of this service can update
+            //we assume if the cache was skipped we're updating
+            if(skipCache)
+            {
+                window.hello.emit('auth.login.userReady');
+            }
+        }).
+        error(function(data, status)
+        {
+            $rootScope.$broadcast('message.error', 'Uh oh, something went really wrong. Try refreshing the page.'); 
         });
-        
-        
+
         return deferred.promise;
     };
 
@@ -44,6 +54,20 @@ factory("UserService", ['rockEndpoint', '$http', '$q', 'HelloService', function(
                 });
         } else {
             return this.getUser(this.facebookId);
+        }
+    };
+         
+    UserService.updateCache = function()
+    {
+        if (!this.facebookId)
+        {
+            HelloService.getFacebookId().then(function(fbId)
+            {
+                UserService.facebookId = fbId;
+                UserService.getUser(fbId, true);
+            });
+        } else {
+            this.getUser(this.facebookId, true);
         }
     };
          

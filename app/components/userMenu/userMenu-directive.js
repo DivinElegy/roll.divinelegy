@@ -1,21 +1,39 @@
 'use strict'
 
-angular.module('DivinElegy.components.userMenu', ['DivinElegy.components.hello']).
+angular.module('DivinElegy.components.userMenu', ['DivinElegy.components.user', 'DivinElegy.components.hello']).
         
-directive('userMenu', ['HelloService', function(HelloService) 
+directive('userMenu', ['HelloService', 'UserService', function(HelloService, UserService) 
 {
     return {
         templateUrl: 'components/userMenu/userMenu.html',
         link: function(scope, element){
-            HelloService.on('auth.login', function()
+            scope.doLogin = function()
             {
-                scope.showMenu = true;
-                scope.$$phase || scope.$apply();
+                HelloService.facebookLogin();
+            };
+
+            scope.doLogout = function()
+            {
+                HelloService.logout('facebook');
+            };
+            
+            HelloService.on('auth.login.userReady', function()
+            {
+                UserService.getCurrentUser().then(function(user)
+                {
+                    console.log(user);
+                    scope.welcomeMessage = 'Welcome, ' + user.displayName;
+                    scope.quota = user.quota;
+                    scope.quotaRemaining = user.quotaRemaining;
+                    scope.loggedIn = true;
+                    scope.$$phase || scope.$apply();
+                });
             });
             
             HelloService.on('auth.logout', function()
             {
-                scope.showMenu = false;
+                scope.welcomeMessage = '';
+                scope.loggedIn = false;
                 scope.$$phase || scope.$apply();
             });
         }

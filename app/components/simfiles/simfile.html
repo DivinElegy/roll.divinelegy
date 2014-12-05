@@ -40,6 +40,10 @@
         <th>FGChanges:</th>
         <td>{{fgChanges}}</td>
     </tr>
+    <tr ng-if="size">
+        <th>Size:</th>
+        <td>{{size}}</td>
+    </tr>
     <tr ng-if="download">
         <th>Download:</th>
         <td><a href="{{rockEndpoint}}{{download}}">DivinElegy</a></td>

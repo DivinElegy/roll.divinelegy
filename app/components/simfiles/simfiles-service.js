@@ -2,10 +2,10 @@
 
 angular.module("DivinElegy.components.simfiles", ['DivinElegy.components.config']).
       
-factory("SimfileService", ['rockEndpoint', '$http', '$q', function(rockEndpoint, $http, $q)
+factory("SimfileService", ['rockEndpoint', '$http', '$q', 'HelloService', function(rockEndpoint, $http, $q, HelloService)
 {
     var simfileAPI = {};
-    
+    var token = HelloService.getAccessToken();
     simfileAPI.getSimfiles = function()
     {
         var deferred = $q.defer();
@@ -16,7 +16,8 @@ factory("SimfileService", ['rockEndpoint', '$http', '$q', function(rockEndpoint,
         } else {
             $http({
                 url: rockEndpoint + "simfiles/",
-                method: "GET"
+                method: "GET",
+                params: {token: token}
             }).
             success(function (data)
             {
@@ -38,7 +39,8 @@ factory("SimfileService", ['rockEndpoint', '$http', '$q', function(rockEndpoint,
         } else {
             $http({
                 url: rockEndpoint + "simfiles/",
-                method: "GET"
+                method: "GET",
+                params: {token: token}
             }).
             success(function (data)
             {
