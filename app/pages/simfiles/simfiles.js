@@ -15,7 +15,7 @@ angular.module("DivinElegy.pages.simfiles", ["DivinElegy.components.simfiles","D
     $scope.bgChangesFilterKeyword = null;
     $scope.bpmChangesFilterKeyword = null;
     $scope.simfileList = [];
-    
+        
     $scope.openListing = function(listing)
     {
         if($scope.isListingActive(listing))

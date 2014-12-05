@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("DivinElegy.components.simfiles", ['DivinElegy.components.config']).
+angular.module("DivinElegy.components.simfiles", ['DivinElegy.components.config', 'DivinElegy.components.user', 'DivinElegy.components.config', 'DivinElegy.components.hello']).
       
 factory("SimfileService", ['rockEndpoint', '$http', '$q', 'HelloService', function(rockEndpoint, $http, $q, HelloService)
 {
