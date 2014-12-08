@@ -1,11 +1,10 @@
 'use strict';
 
-angular.module("DivinElegy.pages.simfiles", ["DivinElegy.components.simfiles","DivinElegy.components.config"])
+angular.module("DivinElegy.pages.simfiles", ["DivinElegy.components.simfiles","DivinElegy.components.config", "ui.bootstrap"])
 
 .controller("SimfileController", ['$scope', 'rockEndpoint', 'SimfileService', function($scope, rockEndpoint, SimfileService)
 {
     $scope.rockEndpoint = rockEndpoint;
-    $scope.activeListings = [];
     $scope.artistFilterKeyword = null;
     $scope.titleFilterKeyword = null;
     $scope.difficultyFilterKeyword = 'Any';
@@ -15,26 +14,6 @@ angular.module("DivinElegy.pages.simfiles", ["DivinElegy.components.simfiles","D
     $scope.bgChangesFilterKeyword = null;
     $scope.bpmChangesFilterKeyword = null;
     $scope.simfileList = [];
-        
-    $scope.openListing = function(listing)
-    {
-        if($scope.isListingActive(listing))
-        {
-            $scope.activeListings.splice($scope.activeListings.indexOf(listing), 1);
-        } else {
-            $scope.activeListings.push(listing);
-        }
-    };
-    
-    $scope.isListingActive = function(listing)
-    {
-        if($scope.activeListings.indexOf(listing) > -1)
-        {
-            return true;
-        } else {
-            return false;
-        }
-    };
     
     $scope.artistFilter = function (simfile)
     {

@@ -1,11 +1,10 @@
 'use strict';
 
-angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","DivinElegy.components.user","DivinElegy.components.config"])
+angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","DivinElegy.components.user","DivinElegy.components.config", "ui.bootstrap"])
 
 .controller("PackController", ['$scope', '$rootScope', 'rockEndpoint', 'SimfileService', 'UserService', 'HelloService', function($scope, $rootScope, rockEndpoint, SimfileService, UserService, HelloService)
 {
     $scope.rockEndpoint = rockEndpoint;
-    $scope.activeListings = [];
     $scope.packTitleFilterKeyword = null;
     $scope.artistFilterKeyword = null;
     $scope.songTitleFilterKeyword = null;
@@ -72,36 +71,16 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
             UserService.updateCache();
         },1000);
     };
-        
-    $scope.openListing = function(listing)
-    {
-        if($scope.isListingActive(listing))
-        {
-            $scope.activeListings.splice($scope.activeListings.indexOf(listing), 1);
-        } else {
-            $scope.activeListings.push(listing);
-        }
-    };
-    
-    $scope.isListingActive = function(listing)
-    {
-        if($scope.activeListings.indexOf(listing) > -1)
-        {
-            return true;
-        } else {
-            return false;
-        }
-    };
-    
+
     $scope.getContributors = function(contribs)
     {
         return contribs.join(', ');
-    }
+    };
     
     $scope.getSimfileListingIndex = function(packName, index)
     {
         return packName + "" + index;
-    }
+    };
     
     $scope.packTitleFilter = function (pack)
     {

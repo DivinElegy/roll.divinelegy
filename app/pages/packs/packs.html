@@ -15,62 +15,61 @@ FG changes: <input type="checkbox" ng-model="fgChangesFilterKeyword">
 BG changes: <input type="checkbox" ng-model="bgChangesFilterKeyword">
 BPM changes: <input type="checkbox" ng-model="bpmChangesFilterKeyword">
 
-<ul class="simfileList">
-    <li class="simfileListing" ng-class="{active: isListingActive($index)}" ng-repeat="pack in packList | filter: packTitleFilter
-                                                                                                        | filter: artistFilter
-                                                                                                        | filter: songTitleFilter
-                                                                                                        | filter: stepsFilter
-                                                                                                        | filter: fgChangesFilter
-                                                                                                        | filter: bgChangesFilter
-                                                                                                        | filter: bpmChangesFilter
-    " ng-init="contributors=getContributors(pack.contributors)">
-        <a ng-click="openListing($index)">{{pack.title}}</a>
-        <div class="content" ng-show="isListingActive($index)">
-            <img ng-src="{{rockEndpoint}}{{pack.banner}}" alt="swage" />
-            <table>
-                <tr>
-                    <th>Title:</th>
-                    <td>{{pack.title}}</td>
-                </tr>
-                <tr>
-                    <th>Contributors:</th>
-                    <td>{{contributors}}</td>
-                </tr>
-                <tr ng-if="pack.size">
-                    <th>Size:</th>
-                    <td>{{pack.size}}</td>
-                </tr>
-                <tr ng-if="pack.mirrors">
-                    <th>Downloads:</th>
-                    <td>
-                        <ul>
-                            <li class="mirrorListing" ng-repeat="mirror in pack.mirrors">
-                                <a ng-if="mirror.source == 'DivinElegy'" ng-click="downloadFromDe(pack)" class="de-link">{{mirror.source}}</a>
-                                <a ng-if="mirror.source != 'DivinElegy'" href="{{mirror.uri}}">{{mirror.source}}</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-            <div class="clearfix"></div>
-            <h1>Charts</h1>
-            <ul>
-                <li class="simfileListing" ng-repeat="simfile in pack.simfiles" ng-class="{active: isListingActive(getSimfileListingIndex(pack.title,$index))}">
-                    <a ng-click="openListing(getSimfileListingIndex(pack.title,$index))">{{simfile.title}}</a>
-                    <div class="content" ng-show="isListingActive(getSimfileListingIndex(pack.title,$index))">
-                        <simfile rock-endpoint="rockEndpoint"
-                                 simfile="simfile"
-                                 banner="simfile.banner"
-                                 title="simfile.title"
-                                 artist="simfile.artist"
-                                 steps="simfile.steps"
-                                 bpm-changes="simfile.bpmChanges"
-                                 bg-changes="simfile.bgChanges"
-                                 fg-changes="simfile.fgChanges"
-                        />
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </li>
-</ul>
+<accordion close-others="false">
+    <accordion-group class     = "simfileListing"
+                     is-open   = "isOpen"
+                     ng-class  = "{active: isOpen}"
+                     heading   = "{{pack.title}}"
+                     ng-init   = "contributors=getContributors(pack.contributors)"
+                     ng-repeat = "pack in packList | filter: packTitleFilter
+                                                   | filter: artistFilter
+                                                   | filter: songTitleFilter
+                                                   | filter: stepsFilter
+                                                   | filter: fgChangesFilter
+                                                   | filter: bgChangesFilter
+                                                   | filter: bpmChangesFilter"
+    >
+        <img ng-src="{{rockEndpoint}}{{pack.banner}}" alt="swage" />
+        <table>
+            <tr>
+                <th>Title:</th>
+                <td>{{pack.title}}</td>
+            </tr>
+            <tr>
+                <th>Contributors:</th>
+                <td>{{contributors}}</td>
+            </tr>
+            <tr ng-if="pack.size">
+                <th>Size:</th>
+                <td>{{pack.size}}</td>
+            </tr>
+            <tr ng-if="pack.mirrors">
+                <th>Downloads:</th>
+                <td>
+                    <ul>
+                        <li class="mirrorListing" ng-repeat="mirror in pack.mirrors">
+                            <a ng-if="mirror.source == 'DivinElegy'" ng-click="downloadFromDe(pack)" class="de-link">{{mirror.source}}</a>
+                            <a ng-if="mirror.source != 'DivinElegy'" href="{{mirror.uri}}">{{mirror.source}}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <div class="clearfix"></div>
+        <h1>Charts</h1>
+        <accordion>
+            <accordion-group class="simfileListing" is-open="isOpen" ng-class="{active: isOpen}" heading="{{simfile.title}}" ng-repeat="simfile in pack.simfiles">
+                <simfile rock-endpoint="rockEndpoint"
+                         simfile="simfile"
+                         banner="simfile.banner"
+                         title="simfile.title"
+                         artist="simfile.artist"
+                         steps="simfile.steps"
+                         bpm-changes="simfile.bpmChanges"
+                         bg-changes="simfile.bgChanges"
+                         fg-changes="simfile.fgChanges"
+                />
+            </accordion-group>
+        </accordion>
+    </accordion-group>
+</accordion>

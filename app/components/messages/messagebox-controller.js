@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module("DivinElegy.components.messages", ['ngSanitize'])
+angular.module("DivinElegy.components.messages", [])
 
 .controller("MessageBoxController", ['$scope', function($scope)
 {
     //message types are info, success, warning, error
     
-    $scope.message = 'duh herro <a ng-click="willThisWork()">asdf</a>';
+    $scope.message = '';
     $scope.messageType = 'info';
-    $scope.hidden = false;
+    $scope.hidden = true;
         
     $scope.hide = function()
     {
