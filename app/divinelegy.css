@@ -34,6 +34,23 @@ body {
     padding: 7px;
 }
 
+.panel h1 {
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+    margin: 18px 0px 0px 0px;
+    text-shadow:1px 1px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    0px 1px 0 #000,
+    1px 0px 0 #000,
+    0px -1px 0 #000,
+    -1px 0px 0 #000;
+    -webkit-font-smoothing: antialiased;
+}
+
+
 #navigation,
 #controlPanel {
     margin-top: 60px;
@@ -41,6 +58,21 @@ body {
 
 #post {
     margin-top: 16px;
+}
+    
+#floater {
+    width: 126px;
+    height: 126px;
+    position: relative;
+    top: -100px;
+    margin-bottom: -116px;
+}
+
+#targets {
+    position: relative;
+    top: -32px;
+    right: 10px;
+    margin-bottom: -40px;
 }
 
 #message-box {

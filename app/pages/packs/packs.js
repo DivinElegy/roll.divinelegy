@@ -14,7 +14,6 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     $scope.fgChangesFilterKeyword = null;
     $scope.bgChangesFilterKeyword = null;
     $scope.bpmChangesFilterKeyword = null;
-    $scope.simfileList = [];
     
     var filesizeBytes = function(size)  
     {  

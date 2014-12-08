@@ -21,7 +21,7 @@ directive('userMenu', ['HelloService', 'UserService', function(HelloService, Use
             {
                 UserService.getCurrentUser().then(function(user)
                 {
-                    scope.welcomeMessage = 'Welcome, ' + user.displayName;
+                    scope.welcomeMessage = 'Logged in as ' + user.displayName;
                     scope.quota = user.quota;
                     scope.quotaRemaining = user.quotaRemaining;
                     scope.loggedIn = true;

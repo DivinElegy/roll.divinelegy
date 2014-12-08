@@ -1,30 +1,29 @@
-<div id="usermenu">
+<img id="targets" src="images/Targets.png" />
+<h1 ng-if="loggedIn">Welcome!</h1>
+<h1 ng-if="!loggedIn">Hello!</h1>
+<ul>
+    <li>
+        {{welcomeMessage}}
+        <a class="de-link" ng-if="loggedIn" ng-click="doLogout()">logout</a>
+        <span ng-if="!loggedIn"><a class="de-link" ng-click="doLogin()">Login</a> to access your own control panel.</span>
+    </li>
+</ul>
+<div ng-if="loggedIn">
+    <h1>My Arrows</h1>
     <ul>
-        <li>
-            {{welcomeMessage}}
-            <a class="de-link" ng-if="loggedIn" ng-click="doLogout()">logout</a>
-            <a class="de-link" ng-if="!loggedIn" ng-click="doLogin()">login</a>
-        </li>
+        <li><a href="#/profile">Public Profile</a></li>
+        <li><a href="#/settings">Account Settings</a></li>
     </ul>
-    <div ng-if="loggedIn">
-        <br />
-        <ul>
-            <li>Public Profile</li>
-            <li>Account Settings</li>
-        </ul>
-        <br />
-        <ul>
-            <li>My Uploads</li>
-            <li>My Favourite Files</li>
-            <li>My Favourite Uploaders</li>
-            <li>My Followers</li>
-        </ul>
-        <br />
-        <ul>
-            <li>All Members</li>
-        </ul>
-        <br />
-        <h1>My Quota</h1>
-        {{quotaRemaining}} of {{quota}} remaining
-    </div>
+    <!--<ul>
+        <li>My Uploads</li>
+        <li>My Favourite Files</li>
+        <li>My Favourite Uploaders</li>
+        <li>My Followers</li>
+    </ul>
+    <br />
+    <ul>
+        <li>All Members</li>
+    </ul>-->
+    <h1>My Quota</h1>
+    {{quotaRemaining}} of {{quota}} remaining
 </div>
