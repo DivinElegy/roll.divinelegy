@@ -9,7 +9,7 @@ module.exports = function (grunt) {
             main: {
                 expand: true,
                 cwd: 'app/',
-                src: ['**', '!js/**', '!lib/**', '!**/*.css', '!**/*.js', '!**/bower_components/**', '!**/nbproject/**', '!npm-debug.log'],
+                src: ['**', '!js/**', '!lib/**', '!**/*.example', '!**/*.css', '!**/*.js', '!**/bower_components/**', '!**/nbproject/**', '!npm-debug.log'],
                 dest: 'dist/'
             },
             shims: {
@@ -19,6 +19,11 @@ module.exports = function (grunt) {
                 dest: 'dist/js/shims'
             }
         },
+
+	cleanempty: {
+		options: {},
+		src: ['dist/**']
+	},
  
         rev: {
             files: {
@@ -49,9 +54,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-rev');
     grunt.loadNpmTasks('grunt-usemin');
+    grunt.loadNpmTasks('grunt-cleanempty');
  
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin'
+        'copy', 'cleanempty', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin'
     ]);
 };

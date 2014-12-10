@@ -19,7 +19,8 @@
     "grunt-usemin": "~2.0.2",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-rev": "~0.1.0",
-    "grunt-contrib-clean": "~0.5.0"
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-cleanempty": "~1.0.0"
   },
   "scripts": {
     "postinstall": "bower install",
