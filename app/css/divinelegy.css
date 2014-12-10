@@ -13,7 +13,7 @@
 /* close commented backslash hack */
 
 body {
-    background: url('./images/background.png');
+    background: url('../images/background.png');
     background-color: #0C141C;
     background-repeat:repeat-x;
     background-position:top;
