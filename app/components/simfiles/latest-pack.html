@@ -1,0 +1,23 @@
+<h2>Latest Pack</h2>
+<img class="banner" ng-src="{{rockEndpoint}}{{pack.banner}}" alt="swage" />
+<table>
+    <tr>
+        <th>Title:</th>
+        <td>{{pack.title}}</td>
+    </tr>
+    <tr>
+        <th>By:</th>
+        <td>{{contributors}}<td>
+    </tr>
+    <tr ng-if="pack.mirrors">
+        <th>Download:</th>
+        <td>
+            <ul>
+                <li class="mirrorListing" ng-repeat="mirror in pack.mirrors">
+                    <a ng-if="mirror.source == 'DivinElegy'" ng-click="downloadFromDe(pack)" class="de-link">{{mirror.source}}</a>
+                    <a ng-if="mirror.source != 'DivinElegy'" href="{{mirror.uri}}">{{mirror.source}}</a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>

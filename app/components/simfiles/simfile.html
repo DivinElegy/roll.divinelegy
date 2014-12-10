@@ -8,8 +8,8 @@
         <th>Artist:</th>
         <td>{{artist}}</td>
     </tr>
-    <tr ng-if="steps.single">
-        <th>Steps-single:</th>
+    <tr ng-if="steps.single.length">
+        <th>Singles:</th>
         <td>
             <ul>
                 <li ng-repeat="stepchart in steps.single">
@@ -18,8 +18,8 @@
             </ul>
         </td>
     </tr>
-    <tr ng-if="steps.double">
-        <th>Steps-double:</th>
+    <tr ng-if="steps.double.length">
+        <th>Doubles:</th>
         <td>
             <ul>
                 <li ng-repeat="stepchart in steps.double">
@@ -28,6 +28,7 @@
             </ul>
         </td>
     </tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
     <tr>
         <th>BPMChanges:</th>
         <td>{{bpmChanges}}</td>
@@ -40,9 +41,14 @@
         <th>FGChanges:</th>
         <td>{{fgChanges}}</td>
     </tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
     <tr ng-if="size">
         <th>Size:</th>
         <td>{{size}}</td>
+    </tr>
+    <tr ng-if="uploaded">
+        <th>Upload Date:</th>
+        <td>{{uploaded}}</td>
     </tr>
     <tr ng-if="download">
         <th>Download:</th>

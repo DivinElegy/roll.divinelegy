@@ -18,7 +18,7 @@ BPM changes: <input type="checkbox" ng-model="bpmChangesFilterKeyword">
     <accordion-group class     = "simfileListing"
                      is-open   = "isOpen"
                      ng-class  = "{active: isOpen}"
-                     heading   = "{{simfile.title}}"
+                     heading   = "{{isOpen ? '- ' + simfile.title : '+ ' + simfile.title}}"
                      ng-repeat = "simfile in simfileList | filter: artistFilter
                                                          | filter: titleFilter
                                                          | filter: stepsFilter
@@ -34,9 +34,10 @@ BPM changes: <input type="checkbox" ng-model="bpmChangesFilterKeyword">
                  steps="simfile.steps"
                  bpm-changes="simfile.bpmChanges"
                  bg-changes="simfile.bgChanges"
-                 fg-changes="simfile.fgChanges",
-                 size="simfile.size",
+                 fg-changes="simfile.fgChanges"
+                 size="simfile.size"
                  download="simfile.download"
+                 uploaded="simfile.uploaded"
         />
     </accordion-group>
 </accordion>

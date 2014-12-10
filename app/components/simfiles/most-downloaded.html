@@ -1,0 +1,23 @@
+<h2>Most Popular</h2>
+<img class="banner" ng-src="{{rockEndpoint}}{{banner}}" alt="swage" />
+<table>
+    <tr>
+        <th>Title:</th>
+        <td>{{title}}</td>
+    </tr>
+    <tr>
+        <th>By:</th>
+        <td>{{contributors}}<td>
+    </tr>
+    <tr>
+        <th>Download:</th>
+        <td>
+            <ul>
+                <li class="mirrorListing" ng-repeat="download in downloads">
+                    <a ng-if="download.source == 'DivinElegy'" ng-click="downloadFromDe(packOrSimfile)" class="de-link">{{download.source}}</a>
+                    <a ng-if="download.source != 'DivinElegy'" href="{{download.uri}}">{{download.source}}</a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>

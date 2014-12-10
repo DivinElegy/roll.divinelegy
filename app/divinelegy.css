@@ -24,6 +24,23 @@ body {
     line-height: normal;
 }
 
+table {
+    text-align: left;
+}
+
+#navigation table {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+th {
+    font-weight: bold;
+}
+
+td {
+    padding-left: 5px;
+}
+
 .panel {
     background: #1C2C3C;
     border: 3px solid #000000;
@@ -34,9 +51,13 @@ body {
     padding: 7px;
 }
 
-.panel h1 {
+#navigation hr {
+    margin-top: 18px;
+    border-color: black;
+}
+
+.panel h1, .panel h2 {
     color: white;
-    font-size: 21px;
     font-weight: bold;
     margin: 18px 0px 0px 0px;
     text-shadow:1px 1px 0 #000,
@@ -48,6 +69,24 @@ body {
     0px -1px 0 #000,
     -1px 0px 0 #000;
     -webkit-font-smoothing: antialiased;
+}
+
+.panel h1 {
+    font-size: 21px;
+}
+
+.panel h2 {
+    font-size:15px;
+    margin-bottom: 2px;
+}
+
+.panel .banner {
+    max-width: 130px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    margin-left: -2px;
 }
 
 
@@ -153,8 +192,8 @@ body {
     margin-right:5px;
 }
 
-.simfileListing table {
-    text-align: left;
+.simfileListing .panel-body {
+    margin-top: 5px;
 }
 
 a {
@@ -165,10 +204,6 @@ a {
 
 a:hover {
     text-decoration: underline;
-}
-
-.simfileListing th {
-    font-weight: bold;
 }
 
 .simfileListing.active {

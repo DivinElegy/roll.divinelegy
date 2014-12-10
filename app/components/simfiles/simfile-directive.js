@@ -18,7 +18,8 @@ directive('simfile', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint
             bgChanges: '=',
             fgChanges: '=',
             size: '=',
-            download: '='
+            download: '=',
+            uploaded: '='
         },
         templateUrl: 'components/simfiles/simfile.html',
         link: function($scope) {
