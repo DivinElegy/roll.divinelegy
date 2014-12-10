@@ -9,7 +9,7 @@ module.exports = function (grunt) {
             main: {
                 expand: true,
                 cwd: 'app/',
-                src: ['**', '!js/**', '!lib/**', '!**/*.css'],
+                src: ['**', '!js/**', '!lib/**', '!**/*.css', '!**/*.js', '!**/bower_components/**', '!**/nbproject/**', '!npm-debug.log'],
                 dest: 'dist/'
             },
             shims: {
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         uglify: {
             options: {
                 report: 'min',
-                mangle: false
+                mangle: true
             }
         }
     });
