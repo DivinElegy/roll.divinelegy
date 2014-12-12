@@ -1,11 +1,51 @@
 <img id="floater" src="images/Arrow_Floating.gif" />
-<h1>DivinElegy</h1>
+<h1 style="text-align:center;">DivinElegy</h1>
 <ul class="menu">
-    <li><a href="#/">Home</a></li>
-    <li><a href="#/simfiles">Simfiles</a></li>
-    <li><a href="#/packs">Packs</a></li>
+    <li>
+        <a href="#/simfiles">
+            <img ng-mouseover  = "archiveImg='simfiles_hover.png'; page='Simfile Archive (Individual Files)'"
+                 ng-mouseleave = "archiveImg='simfiles.png'"
+                 ng-init       = "archiveImg='simfiles.png'"
+                 ng-src="images/{{archiveImg}}"/>
+        </a>
+    </li>
+    <li>
+        <a href="#/packs">
+            <img ng-mouseover  = "fImg='simfiles_hover.png'; page='Simfile Archive (Packs)'"
+                 ng-mouseleave = "fImg='simfiles.png'"
+                 ng-init       = "fImg='simfiles.png'"
+                 ng-src="images/{{fImg}}"/>
+        </a>
+    </li>
+    <li>
+        <a href="http://facebook.com/Divinelegy" target="_blank">
+            <img ng-mouseover  = "fbImg='facebook_hover.png'; page='Facebook'"
+                 ng-mouseleave = "fbImg='facebook.png'"
+                 ng-init       = "fbImg='facebook.png'"
+                 ng-src="images/{{fbImg}}"/>
+        </a>
+    </li>
+    <li>
+        <a href="http://youtube.com/use/divinelegy" target="_blank">
+            <img ng-mouseover  = "ytImg='youtube_hover.png'; page='YouTube'"
+                 ng-mouseleave = "ytImg='youtube.png'"
+                 ng-init       = "ytImg='youtube.png'"
+                 ng-src="images/{{ytImg}}"/>
+        </a>
+    </li>
+    <li>
+        <a href="http://peekingboo.spreadshirt.com" target="_blank">
+            <img ng-mouseover  = "ssImg='merch_hover.png'; page='Merchandise'"
+                 ng-mouseleave = "ssImg='merch.png'"
+                 ng-init       = "ssImg='merch.png'"
+                 ng-src="images/{{ssImg}}"/>
+        </a>
+    </li>
 </ul>
-<hr />
+<div class="clearfix"></div>
+<hr style="margin-top: 5px;"/>
+<div class='page-title'>{{page}}</div>
+<hr style="margin-top: 5px;" />
 <div latest-simfile></div>
 <div latest-pack></div>
 <hr />

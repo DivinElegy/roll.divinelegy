@@ -86,6 +86,32 @@ td {
     margin-top: 18px;
     border-color: black;
 }
+#navigation .page-title {
+    min-height: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+
+.menu li {
+    display:inline;
+}
+
+.menu li a {
+    text-decoration: none;
+}
+
+.menu img {
+    width:23px;
+}
+
+.menu {
+    margin-top: 5px;
+}
+
+.menu ul {
+    text-align: center;
+}
 
 .panel h1, .panel h2 {
     color: white;
