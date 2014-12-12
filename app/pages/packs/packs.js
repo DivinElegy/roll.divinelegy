@@ -6,14 +6,15 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
 {
     $scope.rockEndpoint = rockEndpoint;
     $scope.packTitleFilterKeyword = null;
-    $scope.artistFilterKeyword = null;
+    $scope.artistFilterKeyWord = null;
     $scope.songTitleFilterKeyword = null;
     $scope.difficultyFilterKeyword = 'Any';
     $scope.ratingFilterKeyword = null;
-    $scope.contributorFilterKeyword = null;
-    $scope.fgChangesFilterKeyword = null;
-    $scope.bgChangesFilterKeyword = null;
-    $scope.bpmChangesFilterKeyword = null;
+    $scope.stepArtistFilterKeyword = null;
+    $scope.fgChangesFilterKeyword = 'Any';
+    $scope.bgChangesFilterKeyword = 'Any';
+    $scope.bpmChangesFilterKeyword = 'Any';
+    $scope.modeFilterKeyword = 'Any';
     
     var filesizeBytes = function(size)  
     {  
@@ -73,7 +74,7 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
 
     $scope.getContributors = function(contribs)
     {
-        return contribs.join(', ');
+        if(contribs.length) return contribs.join(', ');
     };
     
     $scope.getSimfileListingIndex = function(packName, index)
@@ -86,111 +87,83 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
         var re = new RegExp($scope.packTitleFilterKeyword, 'i');
         return !$scope.packTitleFilterKeyword || re.test(pack.title);
     };
-    
-    $scope.artistFilter = function (pack)
+
+    $scope.simfileFilter = function(pack)
     {
-        var re = new RegExp($scope.artistFilterKeyword, 'i');
-        var simfiles = pack.simfiles;
-        var match = false;
-        for(var i=0; i<simfiles.length; i++)
-        {
-            match = re.test(simfiles[i].artist);
-            if(match) break;
-        }
-        
-        return !$scope.artistFilterKeyword || match;
-    };
-    
-    $scope.songTitleFilter = function (pack)
-    {
-        var re = new RegExp($scope.songTitleFilterKeyword, 'i');
-        var simfiles = pack.simfiles;
-        var match = false;
-        for(var i=0; i<simfiles.length; i++)
-        {
-            match = re.test(simfiles[i].title);
-            if(match) break;
-        }
-        
-        return !$scope.songTitleFilterKeyword || match;
-    };
-    
-    $scope.stepsFilter = function(pack)
-    {
-        // Step 0: Both rating and difficulty keyword are null
-        if(!$scope.ratingFilterKeyword && $scope.difficultyFilterKeyword === 'Any' && !$scope.stepArtistFilterKeyword)
+        // Step 0: All chart keywords are null
+        if(!$scope.songTitleFilterKeyword &&
+           !$scope.artistFilterKeyword &&
+           !$scope.ratingFilterKeyword &&
+           !$scope.stepArtistFilterKeyword &&
+           $scope.difficultyFilterKeyowrd === 'Any' &&
+           $scope.difficultyFilterKeyword === 'Any' &&
+           $scope.fgChangesFilterKeyword === 'Any' &&
+           $scope.bgChangesFilterKeyword === 'Any' &&
+           $scope.modeFilterKeyword === 'Any' &&
+           $scope.bpmFilterKeyword === 'Any'
+           )
         {
             return true;
         }
         
-        var re = new RegExp($scope.stepArtistFilterKeyword, 'i');
         var simfiles = pack.simfiles;
-        
+        var match = false;
         for(var i=0; i<simfiles.length; i++)
         {
-            for(var j=0; j<simfiles[i].steps.single.length; j++)
-            {
-                var chartInfo = simfiles[i].steps.single[j];
-                var match = true;
-                if($scope.ratingFilterKeyword && chartInfo.rating !== $scope.ratingFilterKeyword)
-                {
-                    match = false;
-                }
-
-                if($scope.difficultyFilterKeyword !== 'Any' && chartInfo.difficulty !== $scope.difficultyFilterKeyword)
-                {
-                    match = false;
-                }
-
-                if($scope.stepArtistFilterKeyword && !re.test(chartInfo.artist))
-                {
-                    match = false;
-                }
-
-                if(match) return true;
-            }
+            var simfile = pack.simfiles[i];
+            var songTitleRe = new RegExp($scope.songTitleFilterKeyword, 'i');
+            var artistRe = new RegExp($scope.artistFilterKeyword, 'i');
             
-            for(var j=0; j<simfiles[i].steps.double.length; j++)
+
+            match = (!$scope.songTitleFilterKeyword || songTitleRe.test(simfile.title)) &&
+                    (!$scope.artistFilterKeyword || artistRe.test(simfile.artist)) &&
+                    ($scope.fgChangesFilterKeyword === 'Any' || simfile.fgChanges === $scope.fgChangesFilterKeyword) &&
+                    ($scope.bgChangesFilterKeyword === 'Any' || simfile.bgChanges === $scope.bgChangesFilterKeyword) &&
+                    ($scope.bpmChangesFilterKeyword === 'Any' || simfile.bpmChanges === $scope.bpmChangesFilterKeyword) &&
+                    chartsFilter(simfile);
+
+            if(match) break;
+        }
+        
+        return match;
+    };
+
+    var chartsFilter = function(simfile)
+    {
+        if(
+           !$scope.ratingFilterKeyword &&
+           !$scope.stepArtistFilterKeyword &&
+           $scope.modeFilterKeyword === 'Any' &&
+           $scope.difficultyFilterKeyword === 'Any'
+           )
+        {
+            return true;
+        }
+        
+        var stepArtistRe = new RegExp($scope.stepArtistFilterKeyword, 'i');
+        var steps = [simfile.steps.single, simfile.steps.double];
+        var modeKeywordMap = ['single', 'double'];
+        var match = false;
+        
+        loop1:
+        for(var i=0; i<steps.length; i++)
+        {
+        loop2:
+            for(var j=0; j<steps[i].length; j++)
             {
-                var chartInfo = simfiles[i].steps.double[j];
-                var match = true;
-                if($scope.ratingFilterKeyword && chartInfo.rating !== $scope.ratingFilterKeyword)
-                {
-                    match = false;
-                }
-
-                if($scope.difficultyFilterKeyword !== 'Any' && chartInfo.difficulty !== $scope.difficultyFilterKeyword)
-                {
-                    match = false;
-                }
-
-                if($scope.stepArtistFilterKeyword && !re.test(chartInfo.artist))
-                {
-                    match = false;
-                }
-
-                if(match) return true;;
+                var chart = steps[i][j];
+                match = (!$scope.stepArtistFilterKeyword || stepArtistRe.test(chart.artist)) &&
+                        (!$scope.ratingFilterKeyword || (!isNaN($scope.ratingFilterKeyword) && chart.rating === Number($scope.ratingFilterKeyword))) &&
+                        ($scope.difficultyFilterKeyword === 'Any' || chart.difficulty === $scope.difficultyFilterKeyword) &&
+                        ($scope.modeFilterKeyword === 'Any' || modeKeywordMap[i] === $scope.modeFilterKeyword);
+                
+                if(match) break loop1;
             }
         }
-
-        return false;
-    };
-
-    $scope.fgChangesFilter = function(simfile)
-    {
-            return !$scope.fgChangesFilterKeyword || simfile.fbChanges === 'Yes';
-    };
-    
-    $scope.bgChangesFilter = function(simfile)
-    {
-            return !$scope.bgChangesFilterKeyword || simfile.bgChanges === 'Yes';
-    };
-
-    $scope.bpmChangesFilter = function(simfile)
-    {
-            return !$scope.bpmChangesFilterKeyword || simfile.bpmChanges === 'Yes';
-    };
-    
+        
+        return match;
+    }
+       
     SimfileService.getPacks().then(function(packs)
     {
         $scope.packList = packs;

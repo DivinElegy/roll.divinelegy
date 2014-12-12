@@ -1,30 +1,62 @@
-<input type="text" ng-model="artistFilterKeyword" placeholder="artist..."/>
-<input type="text" ng-model="titleFilterKeyword" placeholder="title..."/>
-<select ng-model="difficultyFilterKeyword">
-    <option value="Any" selected="selected">Any</option>
-    <option value="Novice">Novice</option>
-    <option value="Easy">Easy</option>
-    <option value="Medium">Medium</option>
-    <option value="Hard">Hard</option>
-    <option value="Expert">Expert</option>
-</select>
-<input type="text" ng-model="ratingFilterKeyword" placeholder="rating..."/>
-<input type="text" ng-model="stepArtistFilterKeyword" placeholder="step artist..."/>
-FG changes: <input type="checkbox" ng-model="fgChangesFilterKeyword">
-BG changes: <input type="checkbox" ng-model="bgChangesFilterKeyword">
-BPM changes: <input type="checkbox" ng-model="bpmChangesFilterKeyword">
+<div id="filters">
+    <div id="text-filters">
+        <input type="text" ng-model="songTitleFilterKeyword" placeholder="Song Title"/>
+        <input type="text" ng-model="artistFilterKeyword" placeholder="Song Artist"/>
+        <input type="text" ng-model="stepArtistFilterKeyword" placeholder="Step Artist"/>
+        <input type="text" ng-model="ratingFilterKeyword" placeholder="Block Rating"/>
+    </div>
+    <div id="select-filters">
+        <select ng-model="modeFilterKeyword">
+            <option value="Any" disabled selected>Mode</option>
+            <option value="Any">Any</option>
+            <option value="single">Singles</option>
+            <option value="double">Doubles</option>
+        </select>
+
+        <select ng-model="difficultyFilterKeyword">
+            <option value="Any" disabled selected>Difficulty</option>
+            <option value="Any">Any</option>
+            <option value="Novice">Novice</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+            <option value="Expert">Expert</option>
+        </select>
+
+        <select ng-model="fgChangesFilterKeyword">
+            <option value="Any" disabled selected>FG Changes</option>
+            <option value="Any">Any</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <select ng-model="bgChangesFilterKeyword">
+            <option value="Any" disabled selected>BG Changes</option>
+            <option value="Any">Any</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <select ng-model="bpmChangesFilterKeyword">
+            <option value="Any" disabled selected>BPM Changes</option>
+            <option value="Any">Any</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+</div>
 
 <accordion close-others="false">
     <accordion-group class     = "simfileListing"
                      is-open   = "isOpen"
                      ng-class  = "{active: isOpen}"
                      heading   = "{{isOpen ? '- ' + simfile.title : '+ ' + simfile.title}}"
-                     ng-repeat = "simfile in simfileList | filter: artistFilter
-                                                         | filter: titleFilter
-                                                         | filter: stepsFilter
-                                                         | filter: fgChangesFilter
+                     ng-repeat = "simfile in simfileList | filter: titleFilter
+                                                         | filter: artistFilter
                                                          | filter: bgChangesFilter
-                                                         | filter: bpmChangesFilter"
+                                                         | filter: fgChangesFilter
+                                                         | filter: bpmChangesFilter
+                                                         | filter: chartsFilter"
     >
         <simfile rock-endpoint="rockEndpoint"
                  simfile="simfile"

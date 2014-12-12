@@ -84,6 +84,6 @@ factory("HelloService", ['rockEndpoint', '$http', '$location', '$q', function(ro
             return r.id;
         });
     };
-    
+        
     return hello; //assume hello has been loaded
 }]);
