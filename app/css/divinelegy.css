@@ -40,7 +40,7 @@ table {
     margin-bottom: 20px;
 }
 
-#filters input[type="text"], #filters select {
+input[type="text"], #filters select {
     box-sizing:content-box;
     -ms-box-sizing:content-box;
     -moz-box-sizing:content-box;
@@ -113,7 +113,7 @@ td {
     text-align: center;
 }
 
-.panel h1, .panel h2 {
+h1, h2 {
     color: white;
     font-weight: bold;
     margin: 18px 0px 0px 0px;
@@ -128,11 +128,11 @@ td {
     -webkit-font-smoothing: antialiased;
 }
 
-.panel h1 {
+h1 {
     font-size: 21px;
 }
 
-.panel h2 {
+h2 {
     font-size:15px;
     margin-bottom: 2px;
 }

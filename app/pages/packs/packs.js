@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","DivinElegy.components.user","DivinElegy.components.config", "ui.bootstrap"])
+angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","DivinElegy.components.user","DivinElegy.components.config","DivinElegy.components.ui", "ui.bootstrap"])
 
-.controller("PackController", ['$scope', '$rootScope', 'rockEndpoint', 'SimfileService', 'UserService', 'HelloService', function($scope, $rootScope, rockEndpoint, SimfileService, UserService, HelloService)
+.controller("PackController", ['$scope', '$rootScope', 'rockEndpoint', 'SimfileService', 'UserService', 'UiSettingsService', 'HelloService', function($scope, $rootScope, rockEndpoint, SimfileService, UserService, UiSettingsService, HelloService)
 {
     $scope.rockEndpoint = rockEndpoint;
     $scope.packTitleFilterKeyword = null;
@@ -162,10 +162,14 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
         }
         
         return match;
-    }
-       
+    };
+           
+    $scope.packList = [];
+           
     SimfileService.getPacks().then(function(packs)
     {
+        $scope.pageSize = UiSettingsService.getDirective('simfilesPerPage');
+        $scope.currentPage = 1;
         $scope.packList = packs;
     });
 }]);

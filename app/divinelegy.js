@@ -11,6 +11,7 @@ angular.module('DivinElegy', [
   'DivinElegy.components.messages',
   'DivinElegy.pages.index',
   'DivinElegy.pages.upload',
+  'DivinElegy.pages.account',
   'DivinElegy.pages.simfiles',
   'DivinElegy.pages.packs'
 ]).
@@ -52,7 +53,17 @@ config(['$routeProvider', '$locationProvider', function($routeProvider) {
     }).
     otherwise({redirectTo: '/'});
 }]).
-        
+
+//This feels to small to be in its own component thingy so
+filter('startFrom', function()
+{
+   return function(input, start)
+   {
+       start = +start;
+       return input.slice(start);
+   }
+}).
+
 run(['HelloService', function(HelloService)
 {
     HelloService.init({

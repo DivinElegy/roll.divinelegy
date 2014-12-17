@@ -1,8 +1,8 @@
 'use strict'
 
-angular.module('DivinElegy.components.userMenu', ['DivinElegy.components.user', 'DivinElegy.components.hello']).
+angular.module('DivinElegy.components.userMenu', ['DivinElegy.components.user', 'DivinElegy.components.hello', 'ui.bootstrap']).
         
-directive('userMenu', ['HelloService', 'UserService', function(HelloService, UserService) 
+directive('userMenu', ['HelloService', 'UserService', '$modal', function(HelloService, UserService, $modal) 
 {
     return {
         templateUrl: 'components/userMenu/userMenu.html',
@@ -36,6 +36,14 @@ directive('userMenu', ['HelloService', 'UserService', function(HelloService, Use
                 scope.loggedIn = false;
                 scope.$$phase || scope.$apply();
             });
+            
+            scope.openAccountSettings = function()
+            {
+                $modal.open({
+                    templateUrl: 'pages/account/account.html',
+                    controller: 'AccountController',
+                });
+            };
         }
     };
 }]);

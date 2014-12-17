@@ -52,8 +52,10 @@
                      ng-class  = "{active: isOpen}"
                      heading   = "{{isOpen ? '- ' + pack.title : '+ ' + pack.title}}"
                      ng-init   = "contributors=getContributors(pack.contributors)"
-                     ng-repeat = "pack in packList | filter: packTitleFilter
-                                                   | filter: simfileFilter"
+                     ng-repeat = "pack in filteredPackList = (packList | filter: packTitleFilter
+                                                                       | filter: simfileFilter)
+                                                                       | startFrom: (currentPage-1)*pageSize
+                                                                       | limitTo: pageSize"
     >
         <img ng-src="{{rockEndpoint}}{{pack.banner}}" alt="swage" />
         <table>
@@ -103,4 +105,8 @@
             </accordion-group>
         </accordion>
     </accordion-group>
+    <div style="text-align: center">
+        <pagination total-items="filteredPackList.length" items-per-page="pageSize" ng-model="currentPage" boundary-links="true" rotate="false" max-size="8"></pagination>
+    </div>
 </accordion>
+
