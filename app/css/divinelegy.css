@@ -40,7 +40,7 @@ table {
     margin-bottom: 20px;
 }
 
-input[type="text"], #filters select {
+input[type="text"], select {
     box-sizing:content-box;
     -ms-box-sizing:content-box;
     -moz-box-sizing:content-box;
@@ -171,8 +171,18 @@ h2 {
     margin-bottom: -40px;
 }
 
-#message-box {
+#message-box button{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+#message-box #message {
+    display: block;
     text-align: center;
+}
+
+#message-box {
     font-weight: bold;
     margin-top: 40px;
     padding: 10px;
@@ -182,6 +192,7 @@ h2 {
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
+    position: relative;
 }
 
 #message-box .ok {

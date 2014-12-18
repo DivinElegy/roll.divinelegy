@@ -1,29 +1,35 @@
 <img id="targets" src="images/Targets.png" />
-<h1 ng-if="loggedIn">Welcome!</h1>
-<h1 ng-if="!loggedIn">Hello!</h1>
-<ul>
-    <li>
-        {{welcomeMessage}}
-        <a class="de-link" ng-if="loggedIn" ng-click="doLogout()">logout</a>
-        <span ng-if="!loggedIn"><a class="de-link" ng-click="doLogin()">Login</a> to access your own control panel.</span>
-    </li>
-</ul>
-<div ng-if="loggedIn">
-    <h1>My Arrows</h1>
+<div ng-if="menuReady">
+    <h1 ng-if="loggedIn">Welcome!</h1>
+    <h1 ng-if="!loggedIn">Hello!</h1>
     <ul>
-        <li><a href="#/profile">Public Profile</a></li>
-        <li><a class="de-link" ng-click='openAccountSettings()'>Account Settings</a></li>
+        <li>
+            {{welcomeMessage}}
+            <a class="de-link" ng-if="loggedIn" ng-click="doLogout()">logout</a>
+            <span ng-if="!loggedIn"><a class="de-link" ng-click="doLogin()">Login</a> to access your own control panel.</span>
+        </li>
     </ul>
-    <!--<ul>
-        <li>My Uploads</li>
-        <li>My Favourite Files</li>
-        <li>My Favourite Uploaders</li>
-        <li>My Followers</li>
-    </ul>
-    <br />
-    <ul>
-        <li>All Members</li>
-    </ul>-->
-    <h1>My Quota</h1>
-    {{quotaRemaining}} of {{quota}} remaining
+    <div ng-if="loggedIn">
+        <h1>My Arrows</h1>
+        <ul>
+            <!--<li><a href="#/profile">Public Profile</a></li>-->
+            <li><a class="de-link" ng-click='openAccountSettings()'>Account Settings</a></li>
+        </ul>
+        <!--<ul>
+            <li>My Uploads</li>
+            <li>My Favourite Files</li>
+            <li>My Favourite Uploaders</li>
+            <li>My Followers</li>
+        </ul>
+        <br />
+        <ul>
+            <li>All Members</li>
+        </ul>-->
+        <h1>My Quota</h1>
+        {{quotaRemaining}} of {{quota}} remaining
+    </div>
+</div>
+<div ng-if="!menuReady" style="text-align:center; padding-top: 10px; padding-bottom: 10px;">
+    <img class="rotato" src="images/page_loading.png" />
+    <h2>Just a moment...</h2>
 </div>

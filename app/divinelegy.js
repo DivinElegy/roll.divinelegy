@@ -20,8 +20,8 @@ config(['$routeProvider', '$locationProvider', function($routeProvider) {
     $routeProvider.
     when('/',
     {
-        templateUrl: 'pages/index/index.html',
-        controller: 'IndexController'
+        templateUrl: 'pages/packs/packs.html',
+        controller: 'PackController'
     }).
     when('/upload',
     {

@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/animations.css"/>
         <link rel="stylesheet" href="css/pager.css"/>
         <link rel="stylesheet" href="css/modal.css"/>
+        <link rel="stylesheet" href="css/buttons.css"/>
         <link rel="stylesheet" href="css/divinelegy.css"/>
         <!-- endbuild -->
         
@@ -58,7 +59,7 @@
                                                                                       'error' : messageType == 'error',
                                                                                       'success' : messageType == 'success',
                                                                                       'hidden' : hidden}">
-                    <span message="message"></span> <span class="ok" ng-click="hide()">OK</span>
+                    <span id="message" message="message"></span> <button class="btn btn-warning btn-xs" ng-click="hide()">X</button>
                 </div>
             </div>
             <div class="box_side alpha">

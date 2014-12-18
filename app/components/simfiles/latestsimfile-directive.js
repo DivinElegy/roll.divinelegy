@@ -3,10 +3,11 @@
 //don't put ,[] because that declares a new module. This gets the existing one
 angular.module('DivinElegy.components.simfiles').
         
-directive('latestSimfile', ['rockEndpoint', '$http', 'UserService', 'HelloService', '$rootScope', function(rockEndpoint, $http, UserService, HelloService, $rootScope) 
+directive('latestSimfile', ['rockEndpoint', '$http', 'UserService', 'HelloService', 'UiSettingsService', '$rootScope', function(rockEndpoint, $http, UserService, HelloService, UiSettingsService, $rootScope) 
 {
     return {
         templateUrl: 'components/simfiles/latest-simfile.html',
+        scope: {},
         link: function($scope) {
             $http({
                 url: rockEndpoint + "simfiles/latest/simfile",
@@ -64,7 +65,13 @@ directive('latestSimfile', ['rockEndpoint', '$http', 'UserService', 'HelloServic
                         } else {
                             //TODO: Maybe access token should be in user obj?
                             var url = rockEndpoint + '' + simfile.download + '?token=' + HelloService.getAccessToken(); //0th mirror will always be de
-                            $rootScope.$broadcast('message.warning', 'You are about to download ' + simfile.title + ' which is ' + simfile.size + '. Your current quota is ' + user.quotaRemaining + ' click <a ng-click="updateUserCache()" href="' + url + '">here</a> to confirm.'); 
+                            if(UiSettingsService.getDirective('showDownloadWarning') === 'Yes')
+                            {
+                                $rootScope.$broadcast('message.warning', 'You are about to download ' + simfile.title + ' which is ' + simfile.size + '. Your current quota is ' + user.quotaRemaining + ' click <a ng-click="updateUserCache()" href="' + url + '">here</a> to confirm.'); 
+                            } else {
+                                window.location = url;
+                                $rootScope.updateUserCache();
+                            }
                         }
                     });
                 };
@@ -72,7 +79,7 @@ directive('latestSimfile', ['rockEndpoint', '$http', 'UserService', 'HelloServic
                 $scope.simfile = data;
                 $scope.rockEndpoint = rockEndpoint;
                 $scope.authors = authors.join(', ');
-                $scope.$$phase || $scope.$apply();
+                $rootScope.$$phase || $rootScope.$apply();
             });
         }
     };

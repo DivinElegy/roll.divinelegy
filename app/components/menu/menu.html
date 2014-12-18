@@ -1,14 +1,14 @@
 <img id="floater" src="images/Arrow_Floating.gif" />
 <h1 style="text-align:center;">DivinElegy</h1>
-<ul class="menu">
-    <li>
+<ul class="menu" style="text-align: center">
+    <!--<li>
         <a href="#/simfiles">
             <img ng-mouseover  = "archiveImg='simfiles_hover.png'; page='Simfile Archive (Individual Files)'"
                  ng-mouseleave = "archiveImg='simfiles.png'"
                  ng-init       = "archiveImg='simfiles.png'"
                  ng-src="images/{{archiveImg}}"/>
         </a>
-    </li>
+    </li>-->
     <li>
         <a href="#/packs">
             <img ng-mouseover  = "fImg='simfiles_hover.png'; page='Simfile Archive (Packs)'"
@@ -44,9 +44,9 @@
 </ul>
 <div class="clearfix"></div>
 <hr style="margin-top: 5px;"/>
-<div class='page-title'>{{page}}</div>
+<div class='page-title'>{{page || 'hello : )'}}</div>
 <hr style="margin-top: 5px;" />
-<div latest-simfile></div>
+<!--<div latest-simfile></div>-->
 <div latest-pack></div>
 <hr />
 <div most-downloaded></div>

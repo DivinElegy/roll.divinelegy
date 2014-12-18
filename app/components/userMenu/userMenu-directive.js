@@ -7,8 +7,11 @@ directive('userMenu', ['HelloService', 'UserService', '$modal', function(HelloSe
     return {
         templateUrl: 'components/userMenu/userMenu.html',
         link: function(scope, element){
+            scope.menuReady = !HelloService.isLoggedIn()
+            
             scope.doLogin = function()
             {
+                scope.menuReady = false;
                 HelloService.facebookLogin();
             };
 
@@ -25,6 +28,7 @@ directive('userMenu', ['HelloService', 'UserService', '$modal', function(HelloSe
                     scope.quota = user.quota;
                     scope.quotaRemaining = user.quotaRemaining;
                     scope.loggedIn = true;
+                    scope.menuReady = true;
                     scope.$$phase || scope.$apply();
                 });
             });

@@ -9,7 +9,7 @@ factory("UiSettingsService", ['$localStorage', function($localStorage)
     $localStorage.$default({
         ui: {
             'simfilesPerPage': 10,
-            'showDownloadWarning' : true
+            'showDownloadWarning' : 'Yes'
         }
     });
     

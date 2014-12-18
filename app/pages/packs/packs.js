@@ -56,7 +56,13 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
             } else {
                 //TODO: Maybe access token should be in user obj?
                 var url = rockEndpoint + '' + pack.mirrors[0].uri + '?token=' + HelloService.getAccessToken(); //0th mirror will always be de
-                $rootScope.$broadcast('message.warning', 'You are about to download ' + pack.title + ' which is ' + pack.size + '. Your current quota is ' + user.quotaRemaining + ' click <a ng-click="updateUserCache()" href="' + url + '">here</a> to confirm.'); 
+                if(UiSettingsService.getDirective('showDownloadWarning') === 'Yes')
+                {
+                    $rootScope.$broadcast('message.warning', 'You are about to download ' + pack.title + ' which is ' + pack.size + '. Your current quota is ' + user.quotaRemaining + ' click <a ng-click="updateUserCache()" href="' + url + '">here</a> to confirm.'); 
+                } else {
+                    window.location = url;
+                    $rootScope.updateUserCache();
+                }
             }
         });
     };

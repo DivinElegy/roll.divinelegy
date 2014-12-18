@@ -3,7 +3,7 @@
 //don't put ,[] because that declares a new module. This gets the existing one
 angular.module('DivinElegy.components.simfiles').
         
-directive('simfile', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint', function($rootScope, UserService, HelloService, rockEndpoint) 
+directive('simfile', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint', 'UiSettingsService', function($rootScope, UserService, HelloService, rockEndpoint, UiSettingsService) 
 {
     return {
         restrict: 'E',
@@ -63,7 +63,13 @@ directive('simfile', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint
                     } else {
                         //TODO: Maybe access token should be in user obj?
                         var url = rockEndpoint + '' + simfile.download + '?token=' + HelloService.getAccessToken(); //0th mirror will always be de
-                        $rootScope.$broadcast('message.warning', 'You are about to download ' + simfile.title + ' which is ' + simfile.size + '. Your current quota is ' + user.quotaRemaining + ' click <a ng-click="updateUserCache()" href="' + url + '">here</a> to confirm.'); 
+                        if(UiSettingsService.getDirective('showDownloadWarning') === 'Yes')
+                        {
+                            $rootScope.$broadcast('message.warning', 'You are about to download ' + simfile.title + ' which is ' + simfile.size + '. Your current quota is ' + user.quotaRemaining + ' click <a ng-click="updateUserCache()" href="' + url + '">here</a> to confirm.'); 
+                        } else {
+                            window.location = url;
+                            $rootScope.updateUserCache();
+                        }
                     }
                 });
             };
