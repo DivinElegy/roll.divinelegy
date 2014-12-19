@@ -46,6 +46,7 @@
         </select>
     </div>
 </div>
+
 <accordion close-others="false">
     <accordion-group class         = "simfileListing"
                      is-open       = "isOpen"
@@ -54,10 +55,7 @@
                      ng-class      = "{active: isOpen}"
                      heading       = "{{isOpen ? '- ' + pack.title : '+ ' + pack.title}}"
                      ng-init       = "contributors=getContributors(pack.contributors); beast=false"
-                     ng-repeat     = "pack in filteredPackList = (packList | filter: packTitleFilter
-                                                                       | filter: simfileFilter)
-                                                                       | startFrom: (currentPage-1)*pageSize
-                                                                       | limitTo: pageSize"
+                     ng-repeat     = "pack in filteredPackList | startFrom: (currentPage-1)*pageSize | limitTo: pageSize"
     >
         <div ng-if="beast || isOpen">
             <img ng-src="{{rockEndpoint}}{{pack.banner}}" alt="swage" />

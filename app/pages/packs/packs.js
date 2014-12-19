@@ -2,7 +2,7 @@
 
 angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","DivinElegy.components.user","DivinElegy.components.config","DivinElegy.components.ui", "ui.bootstrap"])
 
-.controller("PackController", ['$scope', '$rootScope', 'rockEndpoint', 'SimfileService', 'UserService', 'UiSettingsService', 'HelloService', function($scope, $rootScope, rockEndpoint, SimfileService, UserService, UiSettingsService, HelloService)
+.controller("PackController", ['$scope', '$rootScope', 'rockEndpoint', 'SimfileService', 'UserService', 'UiSettingsService', 'HelloService', 'filterFilter', function($scope, $rootScope, rockEndpoint, SimfileService, UserService, UiSettingsService, HelloService, filterFilter)
 {
     $scope.rockEndpoint = rockEndpoint;
     $scope.packTitleFilterKeyword = null;
@@ -15,6 +15,13 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     $scope.bgChangesFilterKeyword = 'Any';
     $scope.bpmChangesFilterKeyword = 'Any';
     $scope.modeFilterKeyword = 'Any';
+    $scope.packList = [];
+    $scope.filteredPackList = [];
+    
+    var watchMen = ['packTitleFilterKeyword', 'artistFilterKeyword', 'songTitleFilterKeyword', 'difficultyFilterKeyword', 'ratingFilterKeyword', 'stepArtistFilterKeyword', 'fgChangesFilterKeyword', 'bgChangesFilterKeyword', 'bpmChangesFilterKeyword', 'modeFilterKeyword'];
+    $scope.$watchGroup(watchMen, function(newValues, oldValues) {
+        $scope.applyFilters();
+    });
     
     var filesizeBytes = function(size)  
     {  
@@ -169,13 +176,17 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
         
         return match;
     };
-           
-    $scope.packList = [];
-           
+    
+    $scope.applyFilters = function()
+    {
+        $scope.filteredPackList = filterFilter(filterFilter($scope.packList, $scope.packTitleFilter), $scope.simfileFilter);
+    };
+
     SimfileService.getPacks().then(function(packs)
     {
         $scope.pageSize = UiSettingsService.getDirective('simfilesPerPage');
         $scope.currentPage = 1;
         $scope.packList = packs;
+        $scope.filteredPackList = packs;
     });
 }]);
