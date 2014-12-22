@@ -311,3 +311,9 @@ a:hover {
     background: #d390dd;
     border: 2px solid #700893;
 }
+
+#privacy {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
