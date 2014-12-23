@@ -2,9 +2,8 @@
 
 angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","DivinElegy.components.user","DivinElegy.components.config","DivinElegy.components.ui", "ui.bootstrap"])
 
-.controller("PackController", ['$scope', '$rootScope', 'rockEndpoint', 'SimfileService', 'UserService', 'UiSettingsService', 'HelloService', 'filterFilter', '$routeParams', function($scope, $rootScope, rockEndpoint, SimfileService, UserService, UiSettingsService, HelloService, filterFilter, $routeParams)
+.controller("PackController", ['$scope', 'SimfileService', 'UiSettingsService', 'filterFilter', '$routeParams', '$location', function($scope, SimfileService, UiSettingsService, filterFilter, $routeParams, $location)
 {
-    $scope.rockEndpoint = rockEndpoint;
     $scope.packTitleFilterKeyword = null;
     $scope.artistFilterKeyWord = null;
     $scope.songTitleFilterKeyword = null;
@@ -120,7 +119,19 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     {
         if($routeParams.hash)
         {
-            $scope.swageVar = 'duh herro'
+            if($routeParams.hash.length < 8) $location.path('/');
+            
+            for(var i=0; i<packs.length; i++)
+            {
+                if(packs[i].hash.substring(0, $routeParams.hash.length) == $routeParams.hash)
+                {
+                    $scope.pack = packs[i];
+                    break;
+                }
+            }
+
+//            //TODO: 404 page?
+//            if(!$scope.pack) $location.path('/');
         } else {
             $scope.pageSize = UiSettingsService.getDirective('simfilesPerPage');
             $scope.currentPage = 1;

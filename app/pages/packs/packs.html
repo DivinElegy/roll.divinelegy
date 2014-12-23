@@ -1,20 +1,20 @@
-<div id="filters">
+<div ng-if="packList && packList.length" d="filters">
     <div id="text-filters">
-        <input type="text" ng-model="packTitleFilterKeyword" placeholder="Pack Title"/>
-        <input type="text" ng-model="artistFilterKeyword" placeholder="Song Artist"/>
-        <input type="text" ng-model="songTitleFilterKeyword" placeholder="Song Title"/>
-        <input type="text" ng-model="stepArtistFilterKeyword" placeholder="Step Artist"/>
-        <input type="text" ng-model="ratingFilterKeyword" placeholder="Block Rating"/>
+        <input type="text" ng-model="$parent.packTitleFilterKeyword" placeholder="Pack Title"/>
+        <input type="text" ng-model="$parent.artistFilterKeyword" placeholder="Song Artist"/>
+        <input type="text" ng-model="$parent.songTitleFilterKeyword" placeholder="Song Title"/>
+        <input type="text" ng-model="$parent.stepArtistFilterKeyword" placeholder="Step Artist"/>
+        <input type="text" ng-model="$parent.ratingFilterKeyword" placeholder="Block Rating"/>
     </div>
     <div id="select-filters">
-        <select ng-model="modeFilterKeyword">
+        <select ng-model="$parent.modeFilterKeyword">
             <option value="Any" disabled selected>Mode</option>
             <option value="Any">Any</option>
             <option value="single">Singles</option>
             <option value="double">Doubles</option>
         </select>
 
-        <select ng-model="difficultyFilterKeyword">
+        <select ng-model="$parent.difficultyFilterKeyword">
             <option value="Any" disabled selected>Difficulty</option>
             <option value="Any">Any</option>
             <option value="Novice">Novice</option>
@@ -24,21 +24,21 @@
             <option value="Expert">Expert</option>
         </select>
 
-        <select ng-model="fgChangesFilterKeyword">
+        <select ng-model="$parent.fgChangesFilterKeyword">
             <option value="Any" disabled selected>FG Changes</option>
             <option value="Any">Any</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
         </select>
 
-        <select ng-model="bgChangesFilterKeyword">
+        <select ng-model="$parent.bgChangesFilterKeyword">
             <option value="Any" disabled selected>BG Changes</option>
             <option value="Any">Any</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
         </select>
 
-        <select ng-model="bpmChangesFilterKeyword">
+        <select ng-model="$parent.bpmChangesFilterKeyword">
             <option value="Any" disabled selected>BPM Changes</option>
             <option value="Any">Any</option>
             <option value="Yes">Yes</option>
@@ -47,7 +47,7 @@
     </div>
 </div>
 
-<accordion close-others="false">
+<accordion ng-if="packList && packList.length" close-others="false">
     <accordion-group class         = "simfileListing"
                      is-open       = "isOpen"
                      ng-mouseover  = "beast = true"
@@ -63,4 +63,10 @@
         <pagination total-items="filteredPackList.length" items-per-page="pageSize" ng-model="currentPage" boundary-links="true" rotate="false" max-size="8"></pagination>
     </div>
 </accordion>
+
+<h1 ng-if="pack">{{pack.title}}</h1>
+<div ng-if="pack" class="simfileListing">
+    <!-- rofl -->
+    <pack pack="pack" />
+</div>
 

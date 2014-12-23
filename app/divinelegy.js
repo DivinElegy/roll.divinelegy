@@ -45,7 +45,7 @@ config(['$routeProvider', '$locationProvider', function($routeProvider) {
     }).
     when('/pack/:hash/:name',
     {
-        templateUrl: 'pages/packs/pack.html',
+        templateUrl: 'pages/packs/packs.html',
         controller: 'PackController'
     }).
     when('/packs/test',

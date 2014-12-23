@@ -16,7 +16,17 @@ directive('pack', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint', 
             {
                 if(contribs.length) return contribs.join(', ');
             };
-                                    
+            
+            var slugify = function(text)
+            {
+              return text.toString().toLowerCase()
+                .replace(/\s+/g, '-')           // Replace spaces with -
+                .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                .replace(/^-+/, '')             // Trim - from start of text
+                .replace(/-+$/, '');            // Trim - from end of text
+            }
+
             var filesizeBytes = function(size)  
             {  
                 //units are already bytes
@@ -80,6 +90,15 @@ directive('pack', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint', 
             };
             
             $scope.contributors = getContributors($scope.pack.contributors);
+            
+            if($scope.pack.mirrors[$scope.pack.mirrors.length - 1].source !== 'Standalone Link')
+            {
+                $scope.pack.mirrors.push({
+                    source: 'Standalone Link',
+                    uri: "#/pack/" + $scope.pack.hash.substr(0,8) + "/" + slugify($scope.pack.title)
+               });
+            }
+            
             $scope.rockEndpoint = rockEndpoint;
         }
     };
