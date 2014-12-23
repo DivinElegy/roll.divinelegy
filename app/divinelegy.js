@@ -43,6 +43,11 @@ config(['$routeProvider', '$locationProvider', function($routeProvider) {
         templateUrl: 'pages/packs/packs.html',
         controller: 'PackController'
     }).
+    when('/pack/:hash/:name',
+    {
+        templateUrl: 'pages/packs/pack.html',
+        controller: 'PackController'
+    }).
     when('/packs/test',
     {
         resolve: {

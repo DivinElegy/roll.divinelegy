@@ -1,24 +1,24 @@
-<img ng-src="{{rockEndpoint + banner}}" alt="swage" />
+<img ng-src="{{rockEndpoint + simfile.banner}}" alt="swage" />
 <table>
     <tr>
         <th>Title:</th>
-        <td>{{title}}</td>
+        <td>{{simfile.title}}</td>
     </tr>
     <tr>
         <th>Artist:</th>
-        <td>{{artist}}</td>
+        <td>{{simfile.artist}}</td>
     </tr>
-    <tr ng-if="steps.single.length">
+    <tr ng-if="simfile.steps.single.length">
         <th>Singles:</th>
         <td>
             <ul>
-                <li ng-repeat="stepchart in steps.single">
+                <li ng-repeat="stepchart in simfile.steps.single">
                     <div class="difficulty {{stepchart.difficulty}}">{{stepchart.rating}} ({{stepchart.artist}})</div>
                 </li>
             </ul>
         </td>
     </tr>
-    <tr ng-if="steps.double.length">
+    <tr ng-if="simfile.steps.double.length">
         <th>Doubles:</th>
         <td>
             <ul>
@@ -31,17 +31,18 @@
     <tr><td colspan="2">&nbsp;</td></tr>
     <tr>
         <th>BPMChanges:</th>
-        <td>{{bpmChanges}}</td>
+        <td>{{simfile.bpmChanges}}</td>
     </tr>
     <tr>
         <th>BGChanges:</th>
-        <td>{{bgChanges}}</td>
+        <td>{{simfile.bgChanges}}</td>
     </tr>
     <tr>
         <th>FGChanges:</th>
-        <td>{{fgChanges}}</td>
+        <td>{{simfile.fgChanges}}</td>
     </tr>
     <tr><td colspan="2">&nbsp;</td></tr>
+    <!-- TODO: these need to be implemented properly at some point -->
     <tr ng-if="size">
         <th>Size:</th>
         <td>{{size}}</td>

@@ -3,15 +3,20 @@
 //don't put ,[] because that declares a new module. This gets the existing one
 angular.module('DivinElegy.components.simfiles').
         
-directive('simfile', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint', 'UiSettingsService', function($rootScope, UserService, HelloService, rockEndpoint, UiSettingsService) 
+directive('pack', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint', 'UiSettingsService', function($rootScope, UserService, HelloService, rockEndpoint, UiSettingsService) 
 {
     return {
         restrict: 'E',
         scope: {
-            simfile: '=',
+            pack: '='
         },
-        templateUrl: 'components/simfiles/simfile.html',
+        templateUrl: 'components/simfiles/pack.html',
         link: function($scope) {
+            var getContributors = function(contribs)
+            {
+                if(contribs.length) return contribs.join(', ');
+            };
+                                    
             var filesizeBytes = function(size)  
             {  
                 //units are already bytes
@@ -33,17 +38,17 @@ directive('simfile', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint
                 return Number(size);  
             };
 
-            $scope.downloadFromDe = function(simfile)
-            {      
+            $scope.downloadFromDe = function(pack)
+            {    
                 if(!UserService.getCurrentUser())
                 {
                     $rootScope.$broadcast('message.error', 'You need to be logged in to download from DivinElegy.'); 
                     return;
                 }
-                
+
                 UserService.getCurrentUser().then(function(user)
-                {
-                    var size = filesizeBytes(simfile.size);
+                {            
+                    var size = filesizeBytes(pack.size);
                     var quotaRemaining = filesizeBytes(user.quotaRemaining);
 
                     if(quotaRemaining < size)
@@ -51,10 +56,10 @@ directive('simfile', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint
                         $rootScope.$broadcast('message.error', 'Sorry, you do not have enough quota to download that file. Quota resets at 00:00 UTC+0'); 
                     } else {
                         //TODO: Maybe access token should be in user obj?
-                        var url = rockEndpoint + '' + simfile.download + '?token=' + HelloService.getAccessToken(); //0th mirror will always be de
+                        var url = rockEndpoint + '' + pack.mirrors[0].uri + '?token=' + HelloService.getAccessToken(); //0th mirror will always be de
                         if(UiSettingsService.getDirective('showDownloadWarning') === 'Yes')
                         {
-                            $rootScope.$broadcast('message.warning', 'You are about to download ' + simfile.title + ' which is ' + simfile.size + '. Your current quota is ' + user.quotaRemaining + ' click <a ng-click="updateUserCache()" href="' + url + '">here</a> to confirm.'); 
+                            $rootScope.$broadcast('message.warning', 'You are about to download ' + pack.title + ' which is ' + pack.size + '. Your current quota is ' + user.quotaRemaining + ' click <a ng-click="updateUserCache()" href="' + url + '">here</a> to confirm.'); 
                         } else {
                             window.location = url;
                             $rootScope.updateUserCache();
@@ -74,6 +79,7 @@ directive('simfile', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint
                 },1000);
             };
             
+            $scope.contributors = getContributors($scope.pack.contributors);
             $scope.rockEndpoint = rockEndpoint;
         }
     };

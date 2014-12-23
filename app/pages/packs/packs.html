@@ -54,58 +54,10 @@
                      ng-mouseout   = "beast = false"
                      ng-class      = "{active: isOpen}"
                      heading       = "{{isOpen ? '- ' + pack.title : '+ ' + pack.title}}"
-                     ng-init       = "contributors=getContributors(pack.contributors); beast=false"
+                     ng-init       = "beast=false"
                      ng-repeat     = "pack in filteredPackList | startFrom: (currentPage-1)*pageSize | limitTo: pageSize"
     >
-        <div ng-if="beast || isOpen">
-            <img ng-src="{{rockEndpoint}}{{pack.banner}}" alt="swage" />
-            <table>
-                <tr>
-                    <th>Title:</th>
-                    <td>{{pack.title}}</td>
-                </tr>
-                <tr>
-                    <th>Contributors:</th>
-                    <td>{{contributors}}</td>
-                </tr>
-                <tr><td>&nbsp;</td></tr>
-                <tr ng-if="pack.size">
-                    <th>Size:</th>
-                    <td>{{pack.size}}</td>
-                </tr>
-                <tr>
-                    <th>Uploaded Date:</th>
-                    <td>{{pack.uploaded}}</td>
-                </tr>
-                <tr ng-if="pack.mirrors">
-                    <th>Downloads:</th>
-                    <td>
-                        <ul>
-                            <li class="mirrorListing" ng-repeat="mirror in pack.mirrors">
-                                <a ng-if="mirror.source == 'DivinElegy'" ng-click="downloadFromDe(pack)" class="de-link">{{mirror.source}}</a>
-                                <a ng-if="mirror.source != 'DivinElegy'" href="{{mirror.uri}}">{{mirror.source}}</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-            <div class="clearfix"></div>
-            <h1>Charts</h1>
-            <accordion>
-                <accordion-group class="simfileListing" ng-init="beast2 = false" ng-mouseover="beast2 = true" ng-mouseout="beast2 = false" is-open="isOpen2" ng-class="{active: isOpen2}" heading="{{isOpen2 ? '- ' + simfile.title : '+ ' + simfile.title}}" ng-repeat="simfile in pack.simfiles">
-                    <simfile ng-if="beast2 || isOpen2" rock-endpoint="rockEndpoint"
-                             simfile="simfile"
-                             banner="simfile.banner"
-                             title="simfile.title"
-                             artist="simfile.artist"
-                             steps="simfile.steps"
-                             bpm-changes="simfile.bpmChanges"
-                             bg-changes="simfile.bgChanges"
-                             fg-changes="simfile.fgChanges"
-                    />
-                </accordion-group>
-            </accordion>
-        </div>
+        <pack ng-if="beast || isOpen" pack="pack" />
     </accordion-group>
     <div style="text-align: center">
         <pagination total-items="filteredPackList.length" items-per-page="pageSize" ng-model="currentPage" boundary-links="true" rotate="false" max-size="8"></pagination>

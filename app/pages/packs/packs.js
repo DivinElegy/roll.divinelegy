@@ -2,7 +2,7 @@
 
 angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","DivinElegy.components.user","DivinElegy.components.config","DivinElegy.components.ui", "ui.bootstrap"])
 
-.controller("PackController", ['$scope', '$rootScope', 'rockEndpoint', 'SimfileService', 'UserService', 'UiSettingsService', 'HelloService', 'filterFilter', function($scope, $rootScope, rockEndpoint, SimfileService, UserService, UiSettingsService, HelloService, filterFilter)
+.controller("PackController", ['$scope', '$rootScope', 'rockEndpoint', 'SimfileService', 'UserService', 'UiSettingsService', 'HelloService', 'filterFilter', '$routeParams', function($scope, $rootScope, rockEndpoint, SimfileService, UserService, UiSettingsService, HelloService, filterFilter, $routeParams)
 {
     $scope.rockEndpoint = rockEndpoint;
     $scope.packTitleFilterKeyword = null;
@@ -22,80 +22,14 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     $scope.$watchGroup(watchMen, function(newValues, oldValues) {
         $scope.applyFilters();
     });
+
+      //XXX: Why is this here?
+//    $scope.getSimfileListingIndex = function(packName, index)
+//    {
+//        return packName + "" + index;
+//    };
     
-    var filesizeBytes = function(size)  
-    {  
-        //units are already bytes
-        if(!isNaN(size.substring(size.length-2, size.length-1)))
-        {
-            return size.substring(0, size.length-1);
-        }
-
-        var units = size.substring(size.length-2, size.length);
-        var size = size.substring(0, size.length-2);
-        var fileUnits = ["B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];  
-
-        for(var i=0; i<fileUnits.length; i++)
-        {
-            if(fileUnits[i] == units) { break; }
-            size = size*1000;
-        }
-
-        return Number(size);  
-    };
-
-    $scope.downloadFromDe = function(pack)
-    {    
-        if(!UserService.getCurrentUser())
-        {
-            $rootScope.$broadcast('message.error', 'You need to be logged in to download from DivinElegy.'); 
-            return;
-        }
-        
-        UserService.getCurrentUser().then(function(user)
-        {            
-            var size = filesizeBytes(pack.size);
-            var quotaRemaining = filesizeBytes(user.quotaRemaining);
-            
-            if(quotaRemaining < size)
-            {
-                $rootScope.$broadcast('message.error', 'Sorry, you do not have enough quota to download that file. Quota resets at 00:00 UTC+0'); 
-            } else {
-                //TODO: Maybe access token should be in user obj?
-                var url = rockEndpoint + '' + pack.mirrors[0].uri + '?token=' + HelloService.getAccessToken(); //0th mirror will always be de
-                if(UiSettingsService.getDirective('showDownloadWarning') === 'Yes')
-                {
-                    $rootScope.$broadcast('message.warning', 'You are about to download ' + pack.title + ' which is ' + pack.size + '. Your current quota is ' + user.quotaRemaining + ' click <a ng-click="updateUserCache()" href="' + url + '">here</a> to confirm.'); 
-                } else {
-                    window.location = url;
-                    $rootScope.updateUserCache();
-                }
-            }
-        });
-    };
-    
-    $rootScope.updateUserCache = function()
-    {
-        //TODO: This may not be the best way to do this, but basically when this function
-        //is called by ng-click, rock.de hasn't had time to log the download yet so if
-        //we update the cache straight away, we still get the old user quota. Waiting
-        //a second gives it time to sort itself out.
-        setTimeout(function() {
-            UserService.updateCache();
-        },1000);
-    };
-
-    $scope.getContributors = function(contribs)
-    {
-        if(contribs.length) return contribs.join(', ');
-    };
-    
-    $scope.getSimfileListingIndex = function(packName, index)
-    {
-        return packName + "" + index;
-    };
-    
-    $scope.packTitleFilter = function (pack)
+    $scope.packTitleFilter = function(pack)
     {
         var re = new RegExp($scope.packTitleFilterKeyword, 'i');
         return !$scope.packTitleFilterKeyword || re.test(pack.title);
@@ -184,9 +118,14 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
 
     SimfileService.getPacks().then(function(packs)
     {
-        $scope.pageSize = UiSettingsService.getDirective('simfilesPerPage');
-        $scope.currentPage = 1;
-        $scope.packList = packs;
-        $scope.filteredPackList = packs;
+        if($routeParams.hash)
+        {
+            $scope.swageVar = 'duh herro'
+        } else {
+            $scope.pageSize = UiSettingsService.getDirective('simfilesPerPage');
+            $scope.currentPage = 1;
+            $scope.packList = packs;
+            $scope.filteredPackList = packs;
+        }
     });
 }]);
