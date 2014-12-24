@@ -6,7 +6,11 @@
         <li>
             {{welcomeMessage}}
             <a class="de-link" ng-if="loggedIn" ng-click="doLogout()">logout</a>
-            <span ng-if="!loggedIn"><a class="de-link" ng-click="doLogin()">Login</a> to access your own control panel.</span>
+            <span ng-if="!loggedIn">Login to access your own control panel.</span>
+            <a class="btn btn-block btn-social btn-facebook" ng-if="!loggedIn" ng-click="doLogin()">
+                <i class="fa fa-facebook"></i>
+                Login with Facebook
+            </a>
         </li>
     </ul>
     <div ng-if="loggedIn">

@@ -3,13 +3,24 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
  
-        clean: ["dist", '.tmp'],
+        clean: {
+           dist: {
+               force:true,
+               src: ["dist", '.tmp']
+           }
+        },
  
         copy: {
             main: {
                 expand: true,
                 cwd: 'app/',
-                src: ['**', '!js/**', '!lib/**', '!**/*.example', '!**/*.css', '!**/*.js', '!**/bower_components/**', '!**/nbproject/**', '!npm-debug.log'],
+                src: ['**', '!js/**', '!lib/**', '!**/*.example', '!**/*.css', '!**/*.js', '!**/bower_components/**', '!**/nbproject/**', '!**/font-awesome/**', '!npm-debug.log'],
+                dest: 'dist/'
+            },
+            fa: {
+                expand: true,
+                cwd: 'app/css/font-awesome',
+                src: ['fonts/**'],
                 dest: 'dist/'
             },
             shims: {

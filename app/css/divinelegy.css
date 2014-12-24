@@ -147,6 +147,11 @@ h2 {
 }
 
 
+.fb-login-button {
+    width:18px;
+    height: 18px;
+}
+
 #navigation,
 #controlPanel {
     margin-top: 60px;
