@@ -11,3 +11,4 @@ nbproject
 !/app/components/config/*.example
 dist
 .tmp
+instructions.txt
