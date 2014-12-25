@@ -16,8 +16,7 @@ factory("SimfileService", ['rockEndpoint', '$http', '$q', 'HelloService', functi
         } else {
             $http({
                 url: rockEndpoint + "simfiles/",
-                method: "GET",
-                params: {token: token}
+                method: "GET"
             }).
             success(function (data)
             {
@@ -39,8 +38,7 @@ factory("SimfileService", ['rockEndpoint', '$http', '$q', 'HelloService', functi
         } else {
             $http({
                 url: rockEndpoint + "simfiles/",
-                method: "GET",
-                params: {token: token}
+                method: "GET"
             }).
             success(function (data)
             {

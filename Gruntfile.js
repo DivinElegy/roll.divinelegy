@@ -69,6 +69,6 @@ module.exports = function (grunt) {
  
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'copy', 'cleanempty', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin'
+        'clean', 'copy', 'cleanempty', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin'
     ]);
 };
