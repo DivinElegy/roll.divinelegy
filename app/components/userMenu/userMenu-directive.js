@@ -48,6 +48,14 @@ directive('userMenu', ['HelloService', 'UserService', '$modal', function(HelloSe
                     controller: 'AccountController',
                 });
             };
+            
+            scope.openPublicProfile = function()
+            {
+                $modal.open({
+                    templateUrl: 'pages/profile/profile.html',
+                    controller: 'ProfileController',
+                });
+            };
         }
     };
 }]);

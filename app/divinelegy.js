@@ -12,6 +12,7 @@ angular.module('DivinElegy', [
   'DivinElegy.pages.index',
   'DivinElegy.pages.upload',
   'DivinElegy.pages.account',
+  'DivinElegy.pages.profile',
   'DivinElegy.pages.simfiles',
   'DivinElegy.pages.packs'
 ]).
