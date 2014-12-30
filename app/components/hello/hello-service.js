@@ -46,31 +46,10 @@ factory("HelloService", ['rockEndpoint', '$http', '$location', '$q', function(ro
     hello.facebookLogin = function()
     {
         // get the short term token
-        hello('facebook').login( {scope: "hometown"} ).then(function() {
-            var facebookObj = hello.utils.store('facebook');
-
-            // send to 
-            $http({
-                url: rockEndpoint + "user/auth",
-                method: "GET",
-                params: {token: facebookObj.access_token}
-            }).
-            success(function (data)
-            {
-                /*
-                 * It is no good to use auth.login because that comes back almost
-                 * instantly due to facebook. We rely on rock.de for things like
-                 * the user name, so we need to wait for it to be ready, which happens
-                 * here.
-                 */
-                hello.emit('auth.login.userReady');
-                hello.setAccessToken(data.token, data.expires);
-            })
-            .error(function(data)
-            {
-                hello.emit('auth.login.fail');
-            });
-        },
+        //originally I put the auth.login callback in the .then bit, but that was
+        //no good since it only got called after pressing the login button, but not
+        //when the page was refreshed. I still need the fail thing here tho.
+        hello('facebook').login( {scope: "hometown"} ).then(function() {},
         function()
         {
             hello.emit('auth.login.fail');
@@ -79,7 +58,29 @@ factory("HelloService", ['rockEndpoint', '$http', '$location', '$q', function(ro
     
     hello.on('auth.login', function()
     {
+        var facebookObj = hello.utils.store('facebook');
 
+        // send to 
+        $http({
+            url: rockEndpoint + "user/auth",
+            method: "GET",
+            params: {token: facebookObj.access_token}
+        }).
+        success(function (data)
+        {
+            /*
+             * It is no good to use auth.login because that comes back almost
+             * instantly due to facebook. We rely on rock.de for things like
+             * the user name, so we need to wait for it to be ready, which happens
+             * here.
+             */
+            hello.emit('auth.login.userReady');
+            hello.setAccessToken(data.token, data.expires);
+        })
+        .error(function(data)
+        {
+            hello.emit('auth.login.fail');
+        });
     });
         
     hello.getFacebookId = function()

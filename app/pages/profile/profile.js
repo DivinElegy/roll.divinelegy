@@ -15,9 +15,14 @@ angular.module("DivinElegy.pages.profile", ['DivinElegy.components.user'])
     $scope.ok = function()
     {
         var test = {displayName:"tits mcgee"};
-        UserService.updateCurrentUser(test).then(function(result)
+        UserService.updateCurrentUser(test).
+        then(function(result)
         {
             console.log(result);
+        }).
+        fail(function()
+        {
+            console.log('uh oh the spagghetti');
         });
     };
     

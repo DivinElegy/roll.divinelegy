@@ -79,7 +79,8 @@ factory("UserService", ['$rootScope', 'rockEndpoint', '$http', '$q', 'HelloServi
         }).
         error(function(data, status)
         {
-            $rootScope.$broadcast('message.error', 'Uh oh, something went really wrong. Try refreshing the page.'); 
+            deferred.reject();
+            //$rootScope.$broadcast('message.error', 'Uh oh, something went really wrong. Try refreshing the page.'); 
         });
 
         return deferred.promise;
