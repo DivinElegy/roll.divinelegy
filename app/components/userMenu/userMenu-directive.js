@@ -33,6 +33,12 @@ directive('userMenu', ['HelloService', 'UserService', '$modal', function(HelloSe
                 });
             });
             
+            HelloService.on('auth.login.fail', function()
+            {
+                scope.menuReady = true;
+                scope.loggedIn = false;
+            });
+            
             HelloService.on('auth.logout', function()
             {
                 UserService.flushCache();

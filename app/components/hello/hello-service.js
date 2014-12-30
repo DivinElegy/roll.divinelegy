@@ -19,7 +19,7 @@ factory("HelloService", ['rockEndpoint', '$http', '$location', '$q', function(ro
     {
         var deferred = $q.defer();
         
-        if(! this.isLoggedIn())
+        if(!this.isLoggedIn())
         {
             deferred.reject();
             $location.path('/');
@@ -46,30 +46,40 @@ factory("HelloService", ['rockEndpoint', '$http', '$location', '$q', function(ro
     hello.facebookLogin = function()
     {
         // get the short term token
-        hello('facebook').login( {scope: "hometown"} );
+        hello('facebook').login( {scope: "hometown"} ).then(function() {
+            var facebookObj = hello.utils.store('facebook');
+
+            // send to 
+            $http({
+                url: rockEndpoint + "user/auth",
+                method: "GET",
+                params: {token: facebookObj.access_token}
+            }).
+            success(function (data)
+            {
+                /*
+                 * It is no good to use auth.login because that comes back almost
+                 * instantly due to facebook. We rely on rock.de for things like
+                 * the user name, so we need to wait for it to be ready, which happens
+                 * here.
+                 */
+                hello.emit('auth.login.userReady');
+                hello.setAccessToken(data.token, data.expires);
+            })
+            .error(function(data)
+            {
+                hello.emit('auth.login.fail');
+            });
+        },
+        function()
+        {
+            hello.emit('auth.login.fail');
+        });
     };
     
     hello.on('auth.login', function()
     {
-        var facebookObj = hello.utils.store('facebook');
 
-        // send to 
-        $http({
-            url: rockEndpoint + "user/auth",
-            method: "GET",
-            params: {token: facebookObj.access_token}
-        }).
-        success(function (data)
-        {
-            /*
-             * It is no good to use auth.login because that comes back almost
-             * instantly due to facebook. We rely on rock.de for things like
-             * the user name, so we need to wait for it to be ready, which happens
-             * here.
-             */
-            hello.emit('auth.login.userReady');
-            hello.setAccessToken(data.token, data.expires);
-        });
     });
         
     hello.getFacebookId = function()
