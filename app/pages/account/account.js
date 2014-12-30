@@ -4,6 +4,7 @@ angular.module("DivinElegy.pages.account", ['DivinElegy.components.ui'])
 
 .controller("AccountController", ['$scope', '$modalInstance', 'UiSettingsService', function($scope, $modalInstance, UiSettingsService)
 {
+    $scope.hidden = true;
     $scope.simfilesPerPage = UiSettingsService.getDirective('simfilesPerPage');
     $scope.downloadWarnings = UiSettingsService.getDirective('showDownloadWarning');
     
@@ -11,7 +12,9 @@ angular.module("DivinElegy.pages.account", ['DivinElegy.components.ui'])
     {
         UiSettingsService.setDirective('simfilesPerPage', $scope.simfilesPerPage);
         UiSettingsService.setDirective('showDownloadWarning', $scope.downloadWarnings);
-        $scope.status = "Saved!";
+        $scope.hidden = false;
+        $scope.messageType = 'success';
+        $scope.status = 'Saved!';
     };
     
     $scope.cancel = function()
