@@ -14,7 +14,7 @@ module.exports = function (grunt) {
             main: {
                 expand: true,
                 cwd: 'app/',
-                src: ['**', '!js/**', '!lib/**', '!**/*.example', '!**/*.css', '!**/*.js', '!**/bower_components/**', '!**/nbproject/**', '!**/font-awesome/**', '!npm-debug.log'],
+                src: ['**', '!**/*/*.html', '!js/**', '!lib/**', '!**/*.example', '!**/*.css', '!**/*.js', '!**/bower_components/**', '!**/nbproject/**', '!**/font-awesome/**', '!npm-debug.log'],
                 dest: 'dist/'
             },
             fa: {
@@ -28,6 +28,17 @@ module.exports = function (grunt) {
                 cwd: 'app/lib/webshim/shims',
                 src: ['**'],
                 dest: 'dist/js/shims'
+            }
+        },
+
+        replace: {
+            DivinElegy: {
+                src: ['dist/js/divinelegy.min.js'],
+                overwrite: true,
+                replacements: [{
+                    from: /value\(\"rockEndpoint\",[^\)]*\)/g,
+                    to: 'value("rockEndpoint", "http://divinelegy.com/staging/rock/public_html/")'
+                }]
             }
         },
 
@@ -55,6 +66,30 @@ module.exports = function (grunt) {
                 report: 'min',
                 mangle: true
             }
+        },
+
+        ngtemplates: {
+            DivinElegy: {
+                cwd: 'app',
+                src: ['**/*.html', '!index.html'],
+                dest: '.tmp/templates.js',
+                options: {
+                    base: 'dist',
+                    module: 'DivinElegy',
+                    usemin: 'js/divinelegy.min.js',
+                    htmlmin: {
+                        collapseBooleanAttributes:      true,
+                        collapseWhitespace:             true,
+                        conservativeCollapse:           true,
+                        removeAttributeQuotes:          true,
+                        removeComments:                 true, // Only if you don't use comment directives!
+                        removeEmptyAttributes:          true,
+                        removeRedundantAttributes:      true,
+                        removeScriptTypeAttributes:     true,
+                        removeStyleLinkTypeAttributes:  true
+                    }
+                }
+            }
         }
     });
  
@@ -66,9 +101,20 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-rev');
     grunt.loadNpmTasks('grunt-usemin');
     grunt.loadNpmTasks('grunt-cleanempty');
+    grunt.loadNpmTasks('grunt-angular-templates');
+    grunt.loadNpmTasks('grunt-text-replace');
  
     // Tell Grunt what to do when we type "grunt" into the terminal
     grunt.registerTask('default', [
-        'clean', 'copy', 'cleanempty', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin'
+        'clean',
+        'copy',
+        'cleanempty',
+        'useminPrepare',
+        'ngtemplates',
+        'concat',
+        'uglify',
+        'cssmin',
+        'usemin',
+        'replace'
     ]);
 };

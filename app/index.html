@@ -27,7 +27,6 @@
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script src="bower_components/ngstorage/ngStorage.min.js"></script>
         <script src="bower_components/hello/dist/hello.all.js"></script>
-
         <script src="components/config/rockEndpoint-value.js"></script>
         <script src="components/hello/hello-service.js"></script>
         <script src="components/user/user-service.js"></script>
@@ -42,27 +41,24 @@
         <script src="components/messages/messagebox-controller.js"></script>
         <script src="components/messages/messagebox-directive.js"></script>
         <script src="components/uiSettings/uisettings-service.js"></script>
-        
         <script src="pages/index/index.js"></script>
         <script src="pages/upload/upload.js"></script>
         <script src="pages/account/account.js"></script>
         <script src="pages/profile/profile.js"></script>
         <script src="pages/simfiles/simfiles.js"></script>
         <script src="pages/packs/packs.js"></script>
-        
-        <!-- good luck cameron -->
         <script src="divinelegy.js"></script>
         <!-- endbuild -->
     </head>
     <body>
         <div class="container">
             <div class="box_full">
-                <div id="message-box" ng-controller="MessageBoxController" ng-class="{'info' : messageType == 'info',
+                <div class="message-box" ng-controller="MessageBoxController" ng-class="{'info' : messageType == 'info',
                                                                                       'warning' : messageType == 'warning',
                                                                                       'error' : messageType == 'error',
                                                                                       'success' : messageType == 'success',
                                                                                       'hidden' : hidden}">
-                    <span id="message" message="message"></span> <button class="btn btn-warning btn-xs" ng-click="hide()">X</button>
+                    <span class="message" message="message"></span> <button class="btn btn-warning btn-xs" ng-click="hide()">X</button>
                 </div>
             </div>
             <div class="box_side alpha">

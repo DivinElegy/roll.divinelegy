@@ -75,6 +75,7 @@ factory("UserService", ['$rootScope', 'rockEndpoint', '$http', '$q', 'HelloServi
         }).
         success(function (data)
         {
+            UserService.updateCache();
             deferred.resolve(data);
         }).
         error(function(data, status)

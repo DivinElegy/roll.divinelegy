@@ -40,7 +40,7 @@ table {
     margin-bottom: 20px;
 }
 
-input[type="text"], select {
+input, select {
     box-sizing:content-box;
     -ms-box-sizing:content-box;
     -moz-box-sizing:content-box;
@@ -176,18 +176,18 @@ h2 {
     margin-bottom: -40px;
 }
 
-#message-box button{
+.message-box button{
     position: absolute;
     right: 10px;
     top: 5px;
 }
 
-#message-box #message {
+.message-box #message {
     display: block;
     text-align: center;
 }
 
-#message-box {
+.message-box {
     font-weight: bold;
     margin-top: 40px;
     padding: 10px;
@@ -200,7 +200,7 @@ h2 {
     position: relative;
 }
 
-#message-box .ok {
+.message-box .ok {
     display: inline-block;
     text-align: center;
     width: 32px;
@@ -213,35 +213,40 @@ h2 {
 }
 
 .de-link,
-#message-box .ok:hover {
+.message-box .ok:hover {
     cursor: pointer;
 }
 
-#message-box.hidden {
+.message-box.hidden {
     opacity: 0;
 }
 
-#message-box.info {
+.message-box.info {
     color: #3d7cb2;
     border: 3px solid #3d7cb2;
 }
 
-#message-box.success {
+.message-box.success {
     background-color: #dff2bf;
     color: #a5c084;
     border: 2px solid #a5c084;
 }
 
-#message-box.warning {
+.message-box.warning {
     background-color: #feefb3;
     color: #c9aa73;
     border: 2px solid #c9aa73;
 }
 
-#message-box.error {
+.message-box.error {
     background-color: #ffbaba;
     color: #d20000;
     border: 2px solid #d20000;
+}
+
+.modal-dialog .message-box {
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 .simfileListing {

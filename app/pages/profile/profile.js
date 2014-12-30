@@ -4,23 +4,37 @@ angular.module("DivinElegy.pages.profile", ['DivinElegy.components.user'])
 
 .controller("ProfileController", ['$scope', '$modalInstance', 'UserService', function($scope, $modalInstance, UserService)
 {
+    $scope.hidden = true;
+    
     UserService.getCurrentUser().then(function(user)
     {
         console.log(user);
         $scope.country = user.country;
-        $scope.email = user.email;
         $scope.displayName = user.displayName;
     });
 
     $scope.ok = function()
     {
-        var test = {displayName:"tits mcgee"};
-        UserService.updateCurrentUser(test).
+        var update = {displayName:$scope.displayName, country:$scope.country};
+        UserService.updateCurrentUser(update).
         then(function(result)
         {
             console.log(result);
-        }).
-        fail(function()
+            if(result.status === 'success')
+            {
+                $scope.hidden = false;
+                $scope.messageType = 'success';
+                $scope.status = 'Saved!';
+            }
+            
+            if(result.status === 'error')
+            {
+                $scope.hidden = false;
+                $scope.messageType = 'error';
+                $scope.status = result.messages[0];
+            }
+        },
+        function()
         {
             console.log('uh oh the spagghetti');
         });

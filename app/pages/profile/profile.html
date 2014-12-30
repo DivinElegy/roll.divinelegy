@@ -1,6 +1,10 @@
 <div class="modal-header">
+    <div class="message-box" ng-if="!hidden" ng-class="{'error'  : messageType == 'error',
+                                                        'success': messageType == 'success'}"
+    >
+        <span class="message">{{status}}</span> <button class="btn btn-warning btn-xs" ng-click="$parent.hidden=true">X</button>
+    </div>
     <h1 class="modal-title">Public Profile</h1>
-    <h2 ng-if="status">{{status}}</h2>
 </div>
 <div class="modal-body">
     <h2>Display name</h2>
