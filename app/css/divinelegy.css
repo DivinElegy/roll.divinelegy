@@ -59,6 +59,10 @@ input, select {
     border-radius: 4px;
 }
 
+#text-filters input:last-child, #select-filters select:last-child {
+    margin-right: 0px !important;
+}
+
 #navigation table {
     border-collapse: separate;
     border-spacing: 0 5px;
