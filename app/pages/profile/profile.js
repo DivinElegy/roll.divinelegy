@@ -9,13 +9,22 @@ angular.module("DivinElegy.pages.profile", ['DivinElegy.components.user'])
     UserService.getCurrentUser().then(function(user)
     {
         console.log(user);
-        $scope.country = user.country;
+        $scope.country = user.country ? user.country : "NULL";
         $scope.displayName = user.displayName;
     });
 
     $scope.ok = function()
     {
-        var update = {displayName:$scope.displayName, country:$scope.country};
+        var update = {displayName:$scope.displayName};
+        
+        if($scope.country !== "NULL")
+        {
+            update.country = $scope.country;
+        } else {
+            update.country = null;
+            console.log(update);
+        }
+        
         UserService.updateCurrentUser(update).
         then(function(result)
         {
