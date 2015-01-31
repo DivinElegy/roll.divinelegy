@@ -41,10 +41,18 @@
                  ng-src="images/{{ssImg}}"/>
         </a>
     </li>
+    <li>
+        <a href="http://peekingboo.com" target="_blank">
+            <img ng-mouseover  = "pkbImg='peekingboo_hover.png'; page='PeekingBoo'"
+                 ng-mouseleave = "pkbImg='peekingboo.png'"
+                 ng-init       = "pkbImg='peekingboo.png'"
+                 ng-src="images/{{pkbImg}}"/>
+        </a>
+    </li>
 </ul>
 <div class="clearfix"></div>
 <hr style="margin-top: 5px;"/>
-<div class='page-title'>{{page || 'hello : )'}}</div>
+<div class='page-title'>{{page || "Rock-N-Roll"}}</div>
 <hr style="margin-top: 5px;" />
 <!--<div latest-simfile></div>-->
 <div latest-pack></div>

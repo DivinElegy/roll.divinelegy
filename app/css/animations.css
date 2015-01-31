@@ -45,6 +45,10 @@ tbody.collapse.in {
     -moz-animation-duration: 2s; 
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: linear;
+	width:40px;
+	height:40px;
+	position:relative;
+	top:8px;
 }
 
 @-webkit-keyframes rotate {
