@@ -64,6 +64,13 @@ input[type="text"], select {
 	*/
 }
 
+select {
+    appearance:none;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    background: url("../images/dropdown.png") no-repeat right rgba(0,0,0,0.65);
+}
+
 input[type="checkbox"] {
     margin-bottom: 8px;
 }
