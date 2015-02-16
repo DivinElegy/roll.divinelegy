@@ -2,7 +2,7 @@
 
 angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","DivinElegy.components.user","DivinElegy.components.config","DivinElegy.components.ui", "ui.bootstrap"])
 
-.controller("PackController", ['$scope', 'SimfileService', 'UiSettingsService', 'filterFilter', '$routeParams', '$location', function($scope, SimfileService, UiSettingsService, filterFilter, $routeParams, $location)
+.controller("PackController", ['$scope', 'SimfileService', 'UiSettingsService', 'filterFilter', '$routeParams', '$location', '$window', function($scope, SimfileService, UiSettingsService, filterFilter, $routeParams, $location, $window)
 {
     $scope.packTitleFilterKeyword = null;
     $scope.artistFilterKeyWord = null;
@@ -151,7 +151,7 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
 //            //TODO: 404 page?
 //            if(!$scope.pack) $location.path('/');
         } else {
-            $scope.pageSize = UiSettingsService.getDirective('simfilesPerPage');
+            $scope.pageSize = UiSettingsService.getDirective('simfilesPerPageAuto') ? Math.floor(($window.innerHeight - 280)/40) : UiSettingsService.getDirective('simfilesPerPage');
             $scope.currentPage = 1;
             $scope.packList = packs;
             $scope.filteredPackList = packs;

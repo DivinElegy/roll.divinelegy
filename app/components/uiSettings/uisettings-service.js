@@ -9,13 +9,14 @@ factory("UiSettingsService", ['$localStorage', function($localStorage)
     $localStorage.$default({
         ui: {
             'simfilesPerPage': 10,
+            'simfilesPerPageAuto': true,
             'showDownloadWarning' : 'Yes'
         }
     });
     
     UiSettingsService.setDirective = function(directive, value)
     {
-        if($localStorage.ui[directive]) $localStorage.ui[directive] = value;
+        if($localStorage.ui.hasOwnProperty(directive)) $localStorage.ui[directive] = value;
     };
     
     UiSettingsService.getDirective = function(directive)

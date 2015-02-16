@@ -8,7 +8,9 @@
 </div>
 <div class="modal-body">
     <h2>Simfiles per page</h2>
-    <input type="text" ng-model="simfilesPerPage"/>
+    <input type="text" ng-model="simfilesPerPage" ng-disabled="simfilesPerPageAuto"/><br />
+    <label for="auto">Automatic</label>
+    <input name="auto" type="checkbox" ng-model="simfilesPerPageAuto"/>
     <h2>Download Warnings</h2>
     <select ng-model="downloadWarnings">
         <option value="Yes">Yes</option>
