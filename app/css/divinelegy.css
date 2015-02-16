@@ -64,6 +64,10 @@ input[type="text"], select {
 	*/
 }
 
+input[type="checkbox"] {
+    margin-bottom: 8px;
+}
+
 #text-filters input:last-child, #select-filters select:last-child {
     margin-right: 0px !important;
 }
@@ -341,4 +345,9 @@ a:hover {
     position: fixed;
     bottom: 4px;
     right: 4px;
+}
+
+.help-block {
+    display: block;
+    margin-bottom: 10px;
 }

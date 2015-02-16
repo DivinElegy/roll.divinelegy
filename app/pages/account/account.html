@@ -11,11 +11,16 @@
     <input type="text" ng-model="simfilesPerPage" ng-disabled="simfilesPerPageAuto"/><br />
     <label for="auto">Automatic</label>
     <input name="auto" type="checkbox" ng-model="simfilesPerPageAuto"/>
+    <span class="help-block">Set the number of listings to appear on each page. Selecting the "Automatic" option will automatically determine the highest possible number of items to be listed on your screen based on your browser height.</span>
+    
     <h2>Download Warnings</h2>
     <select ng-model="downloadWarnings">
         <option value="Yes">Yes</option>
         <option value="No">No</option>
     </select>
+    <span class="help-block">Select "Yes" if you would like to be warned about downloads that will affect your daily quota.</span>
+    
+    <span class="help-block">*Changes will not take effect until you refresh the page</span>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" ng-click="ok()">Save</button>
