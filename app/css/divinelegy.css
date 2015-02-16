@@ -351,3 +351,8 @@ a:hover {
     display: block;
     margin-bottom: 10px;
 }
+
+.accordion-toggle{
+    display: inline-block;
+    width: 100%;
+}
