@@ -81,8 +81,7 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
            !$scope.stepArtistFilterKeyword &&
            $scope.modeFilterKeyword === 'Any' &&
            $scope.difficultyFilterKeyword === 'Any'
-           )
-        {
+        ) {
             return true;
         }
         
@@ -99,7 +98,7 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
             {
                 var chart = steps[i][j];
                 match = (!$scope.stepArtistFilterKeyword || stepArtistRe.test(chart.artist)) &&
-                        (!$scope.ratingFilterKeyword || (!isNaN($scope.ratingFilterKeyword) && chart.rating === Number($scope.ratingFilterKeyword))) &&
+                        (!$scope.ratingFilterKeyword || ratingFilter(chart)) &&
                         ($scope.difficultyFilterKeyword === 'Any' || chart.difficulty === $scope.difficultyFilterKeyword) &&
                         ($scope.modeFilterKeyword === 'Any' || modeKeywordMap[i] === $scope.modeFilterKeyword);
                 
@@ -108,6 +107,25 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
         }
         
         return match;
+    };
+    
+    var ratingFilter = function(chart)
+    {
+        var rating = $scope.ratingFilterKeyword.replace(/\s/g,'');        
+        var ratings = rating.split(",");
+        var ratingRange = rating.split("-");
+
+        if(ratingRange.length === 2 && !isNaN(ratingRange[0] && !isNaN(ratingRange[1])))
+        {
+           return chart.rating <= Number(ratingRange[1]) && chart.rating >= Number(ratingRange[0]);
+        }
+
+        for(var i=0; i<ratings.length; i++)
+        {
+            if(!isNaN(ratings[i]) && chart.rating === Number(ratings[i])) return true;
+        }
+
+        return false;
     };
     
     $scope.applyFilters = function()
