@@ -23,7 +23,7 @@
         <td>
             <ul>
                 <li ng-repeat="stepchart in steps.double">
-                    <span>{{stepchart.difficulty}} {{stepchart.rating}}</span>
+                    <div class="difficulty {{stepchart.difficulty}}">{{stepchart.rating}} ({{stepchart.artist}})</div>
                 </li>
             </ul>
         </td>
