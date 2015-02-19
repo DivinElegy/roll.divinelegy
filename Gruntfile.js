@@ -37,7 +37,7 @@ module.exports = function (grunt) {
                 overwrite: true,
                 replacements: [{
                     from: /value\(\"rockEndpoint\",[^\)]*\)/g,
-                    to: 'value("rockEndpoint", "http://divinelegy.com/staging/rock/public_html/")'
+                    to: 'value("rockEndpoint", "http://rock.divinelegy.com/")'
                 }]
             }
         },
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
                         removeAttributeQuotes:          true,
                         removeComments:                 true, // Only if you don't use comment directives!
                         removeEmptyAttributes:          true,
-                        removeRedundantAttributes:      true,
+                        removeRedundantAttributes:      false, //if this is on input="text" is stripped and some selectors fail
                         removeScriptTypeAttributes:     true,
                         removeStyleLinkTypeAttributes:  true
                     }
