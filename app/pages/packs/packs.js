@@ -151,7 +151,7 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
 //            //TODO: 404 page?
 //            if(!$scope.pack) $location.path('/');
         } else {
-            $scope.pageSize = UiSettingsService.getDirective('simfilesPerPageAuto') ? Math.floor(($window.innerHeight - 280)/40) : UiSettingsService.getDirective('simfilesPerPage');
+            $scope.pageSize = UiSettingsService.getDirective('simfilesPerPageAuto') ? Math.floor(($window.innerHeight - 280)/40 - 1) : UiSettingsService.getDirective('simfilesPerPage');
             $scope.currentPage = 1;
             $scope.packList = packs;
             $scope.filteredPackList = packs;
