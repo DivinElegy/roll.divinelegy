@@ -66,10 +66,29 @@ directive('latestPack', ['rockEndpoint', '$http', 'UserService', 'HelloService',
                         }
                     });
                 };
-                $scope.asdf = 'hello';
+
+                var slugify = function(text)
+                {
+                  return text.toString().toLowerCase()
+                    .replace(/\s+/g, '-')           // Replace spaces with -
+                    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                    .replace(/^-+/, '')             // Trim - from start of text
+                    .replace(/-+$/, '');            // Trim - from end of text
+                };
+
                 $scope.pack = data;
                 $scope.rockEndpoint = rockEndpoint;
                 $scope.contributors = data.contributors.join(', ');
+                
+                if($scope.pack.mirrors[$scope.pack.mirrors.length - 1].source !== 'Permalink')
+                {
+                    $scope.pack.mirrors.push({
+                        source: 'Permalink',
+                        uri: "#/pack/" + $scope.pack.hash.substr(0,8) + "/" + slugify($scope.pack.title)
+                   });
+                }
+                
                 $rootScope.$$phase || $rootScope.$apply();
             });
         }

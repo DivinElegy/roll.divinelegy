@@ -1,5 +1,7 @@
 <h2>Latest Pack</h2>
-<img class="banner" ng-src="{{rockEndpoint}}{{pack.banner}}" alt="swage" />
+<a ng-href="{{pack.mirrors[pack.mirrors.length-1].uri}}">
+    <img class="banner" ng-src="{{rockEndpoint}}{{pack.banner}}" alt="banner" />
+</a>
 <table>
     <tr>
         <th>Title:</th>

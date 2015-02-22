@@ -79,6 +79,25 @@ directive('mostDownloaded', ['rockEndpoint', '$http', 'UserService', 'UiSettings
                 $scope.banner = data.banner;
                 $scope.packOrSimfile = data;
                 
+                var slugify = function(text)
+                {
+                  return text.toString().toLowerCase()
+                    .replace(/\s+/g, '-')           // Replace spaces with -
+                    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                    .replace(/^-+/, '')             // Trim - from start of text
+                    .replace(/-+$/, '');            // Trim - from end of text
+                };
+
+                if($scope.packOrSimfile.mirrors[$scope.packOrSimfile.mirrors.length - 1].source !== 'Permalink')
+                {
+                    $scope.packOrSimfile.mirrors.push({
+                        source: 'Permalink',
+                        uri: "#/pack/" + $scope.packOrSimfile.hash.substr(0,8) + "/" + slugify($scope.packOrSimfile.title)
+                   });
+                }
+                
+                //this is here to cover the case where a simfile is the most downloaded thing
                 if(data.contributors)
                 {
                     $scope.contributors = data.contributors.join(', ');

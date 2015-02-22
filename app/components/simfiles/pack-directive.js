@@ -25,7 +25,7 @@ directive('pack', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint', 
                 .replace(/\-\-+/g, '-')         // Replace multiple - with single -
                 .replace(/^-+/, '')             // Trim - from start of text
                 .replace(/-+$/, '');            // Trim - from end of text
-            }
+            };
 
             var filesizeBytes = function(size)  
             {  
@@ -91,10 +91,10 @@ directive('pack', ['$rootScope', 'UserService', 'HelloService', 'rockEndpoint', 
             
             $scope.contributors = getContributors($scope.pack.contributors);
             
-            if($scope.pack.mirrors[$scope.pack.mirrors.length - 1].source !== 'Standalone Link')
+            if($scope.pack.mirrors[$scope.pack.mirrors.length - 1].source !== 'Permalink')
             {
                 $scope.pack.mirrors.push({
-                    source: 'Standalone Link',
+                    source: 'Permalink',
                     uri: "#/pack/" + $scope.pack.hash.substr(0,8) + "/" + slugify($scope.pack.title)
                });
             }

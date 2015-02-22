@@ -1,4 +1,4 @@
-<img ng-src="{{rockEndpoint + simfile.banner}}" alt="swage" />
+<img ng-src="{{rockEndpoint + simfile.banner}}" alt="banner" />
 <table>
     <tr>
         <th>Title:</th>
@@ -22,7 +22,7 @@
         <th>Double:</th>
         <td>
             <ul>
-                <li ng-repeat="stepchart in steps.double">
+                <li ng-repeat="stepchart in simfile.steps.double">
                     <div class="difficulty {{stepchart.difficulty}}">{{stepchart.rating}} ({{stepchart.artist}})</div>
                 </li>
             </ul>
