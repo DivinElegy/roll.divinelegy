@@ -8,7 +8,6 @@ angular.module("DivinElegy.pages.profile", ['DivinElegy.components.user'])
     
     UserService.getCurrentUser().then(function(user)
     {
-        console.log(user);
         $scope.country = user.country ? user.country : "NULL";
         $scope.displayName = user.displayName;
     });
@@ -22,13 +21,11 @@ angular.module("DivinElegy.pages.profile", ['DivinElegy.components.user'])
             update.country = $scope.country;
         } else {
             update.country = null;
-            console.log(update);
         }
         
         UserService.updateCurrentUser(update).
         then(function(result)
         {
-            console.log(result);
             if(result.status === 'success')
             {
                 $scope.hidden = false;
@@ -45,7 +42,7 @@ angular.module("DivinElegy.pages.profile", ['DivinElegy.components.user'])
         },
         function()
         {
-            console.log('uh oh the spagghetti');
+            //
         });
     };
     

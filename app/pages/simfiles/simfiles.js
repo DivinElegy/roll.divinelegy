@@ -66,9 +66,6 @@ angular.module("DivinElegy.pages.simfiles", ["DivinElegy.components.simfiles","D
             for(var j=0; j<steps[i].length; j++)
             {
                 var chart = steps[i][j];
-                console.log($scope.modeFilterKeyword);
-                console.log(simfile.steps[$scope.modeFilterKeyword]);
-                console.log($scope.modeFilterKeyword === 'Any' || simfile.steps[$scope.modeFilterKeyword].length);
                 match = (!$scope.stepArtistFilterKeyword || stepArtistRe.test(chart.artist)) &&
                         (!$scope.ratingFilterKeyword || (!isNaN($scope.ratingFilterKeyword) && chart.rating === Number($scope.ratingFilterKeyword))) &&
                         ($scope.difficultyFilterKeyword === 'Any' || chart.difficulty === $scope.difficultyFilterKeyword) &&

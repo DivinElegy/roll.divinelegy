@@ -57,11 +57,6 @@ input[type="text"], select {
     padding: 5px 0px 5px 5px;
     width: 110px;
     border-radius: 4px;
-	/* Change how the dropdown arrow looks, it should be #FFF along with the text
-	
-	-webkit-appearance: none;
-	background: url("downArrow.png") no-repeat right #000;
-	*/
 }
 
 select {

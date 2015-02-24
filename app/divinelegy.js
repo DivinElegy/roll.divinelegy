@@ -49,14 +49,6 @@ config(['$routeProvider', '$locationProvider', function($routeProvider) {
         templateUrl: 'pages/packs/packs.html',
         controller: 'PackController'
     }).
-    when('/packs/test',
-    {
-        resolve: {
-            load: function () {
-                console.log("hello");
-            }
-        }
-    }).
     otherwise({redirectTo: '/'});
 }]).
 

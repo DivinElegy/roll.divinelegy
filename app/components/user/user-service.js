@@ -66,7 +66,6 @@ factory("UserService", ['$rootScope', 'rockEndpoint', '$http', '$q', 'HelloServi
     {
         var deferred = $q.defer();
         var token = HelloService.getAccessToken();
-
         $http({
             url: rockEndpoint + "user/" + facebookId,
             method: "POST",
