@@ -173,6 +173,11 @@ h2 {
 	padding-bottom: 18px;
 }
 
+#controlPanel .popover {
+    width: 170px;
+    margin-top: 10px;
+}
+
 #post {
     margin-top: 16px;
 	min-height: 598px;
