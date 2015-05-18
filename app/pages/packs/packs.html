@@ -1,9 +1,9 @@
 <div ng-if="packList && packList.length" id="filters">
     <div id="text-filters">
-        <input type="text" ng-model="$parent.packTitleFilterKeyword" placeholder="Pack Title"/>
-        <input type="text" ng-model="$parent.artistFilterKeyword" placeholder="Song Artist"/>
-        <input type="text" ng-model="$parent.songTitleFilterKeyword" placeholder="Song Title"/>
-        <input type="text" ng-model="$parent.stepArtistFilterKeyword" placeholder="Step Artist"/>
+        <input type="text" ng-model="$parent.packTitleFilterKeyword" placeholder="Pack Title" typeahead="pack.title for pack in packList | filter:$viewValue | limitTo:8"/>
+        <input type="text" ng-model="$parent.artistFilterKeyword" placeholder="Song Artist" typeahead="artist for artist in allSongArtists | filter:$viewValue | limitTo:8" />
+        <input type="text" ng-model="$parent.songTitleFilterKeyword" placeholder="Song Title" typeahead="song for song in allSongTitles | filter:$viewValue | limitTo:8" />
+        <input type="text" ng-model="$parent.stepArtistFilterKeyword" placeholder="Step Artist" typeahead="contributor for contributor in allContributors | filter:$viewValue | limitTo:8" />
         <input type="text" ng-model="$parent.ratingFilterKeyword" placeholder="Block Rating"/>
     </div>
     <div id="select-filters">

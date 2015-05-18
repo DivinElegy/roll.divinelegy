@@ -16,25 +16,22 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     $scope.modeFilterKeyword = 'Any';
     $scope.packList = [];
     $scope.filteredPackList = [];
+    $scope.allContributors = [];
+    $scope.allSongTitles = [];
+    $scope.allSongArtists = [];
     
     var watchMen = ['packTitleFilterKeyword', 'artistFilterKeyword', 'songTitleFilterKeyword', 'difficultyFilterKeyword', 'ratingFilterKeyword', 'stepArtistFilterKeyword', 'fgChangesFilterKeyword', 'bgChangesFilterKeyword', 'bpmChangesFilterKeyword', 'modeFilterKeyword'];
     $scope.$watchGroup(watchMen, function(newValues, oldValues) {
-        $scope.applyFilters();
+        applyFilters();
     });
-
-      //XXX: Why is this here?
-//    $scope.getSimfileListingIndex = function(packName, index)
-//    {
-//        return packName + "" + index;
-//    };
     
-    $scope.packTitleFilter = function(pack)
+    var packTitleFilter = function(pack)
     {
-        var re = new RegExp($scope.packTitleFilterKeyword, 'i');
+        var re = new RegExp(escapeRegExp($scope.packTitleFilterKeyword), 'i');
         return !$scope.packTitleFilterKeyword || re.test(pack.title);
     };
 
-    $scope.simfileFilter = function(pack)
+    var simfileFilter = function(pack)
     {
         // Step 0: All chart keywords are null
         if(!$scope.songTitleFilterKeyword &&
@@ -57,9 +54,8 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
         for(var i=0; i<simfiles.length; i++)
         {
             var simfile = pack.simfiles[i];
-            var songTitleRe = new RegExp($scope.songTitleFilterKeyword, 'i');
-            var artistRe = new RegExp($scope.artistFilterKeyword, 'i');
-            
+            var songTitleRe = new RegExp(escapeRegExp($scope.songTitleFilterKeyword), 'i');
+            var artistRe = new RegExp(escapeRegExp($scope.artistFilterKeyword), 'i');
 
             match = (!$scope.songTitleFilterKeyword || songTitleRe.test(simfile.title)) &&
                     (!$scope.artistFilterKeyword || artistRe.test(simfile.artist)) &&
@@ -85,7 +81,7 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
             return true;
         }
         
-        var stepArtistRe = new RegExp($scope.stepArtistFilterKeyword, 'i');
+        var stepArtistRe = new RegExp(escapeRegExp($scope.stepArtistFilterKeyword), 'i');
         var steps = [simfile.steps.single, simfile.steps.double];
         var modeKeywordMap = ['single', 'double'];
         var match = false;
@@ -128,9 +124,9 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
         return false;
     };
     
-    $scope.applyFilters = function()
+    var applyFilters = function()
     {
-        $scope.filteredPackList = filterFilter(filterFilter($scope.packList, $scope.packTitleFilter), $scope.simfileFilter);
+        $scope.filteredPackList = filterFilter(filterFilter($scope.packList, packTitleFilter), simfileFilter);
     };
 
     SimfileService.getPacks().then(function(packs)
@@ -155,6 +151,31 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
             $scope.currentPage = 1;
             $scope.packList = packs;
             $scope.filteredPackList = packs;
+            
+            for(var i =0; i<packs.length; i++)
+            {
+                var pack = packs[i];
+                for(var j=0; j<pack.contributors.length; j++)
+                {
+                    if($scope.allContributors.indexOf(pack.contributors[j]) === -1)
+                        $scope.allContributors.push(pack.contributors[j]);
+                }
+                
+                for(var j=0; j<pack.simfiles.length; j++)
+                {
+                    if($scope.allSongTitles.indexOf(pack.simfiles[j].title) === -1)
+                        $scope.allSongTitles.push(pack.simfiles[j].title);
+                    
+                    if($scope.allSongArtists.indexOf(pack.simfiles[j].artist) === -1)
+                        $scope.allSongArtists.push(pack.simfiles[j].artist);
+                }
+            }
         }
     });
+    
+    var escapeRegExp = function(str)
+    {
+        str = str ? str : "";
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+    };
 }]);
