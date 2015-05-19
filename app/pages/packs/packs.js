@@ -19,8 +19,10 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     $scope.allContributors = [];
     $scope.allSongTitles = [];
     $scope.allSongArtists = [];
+    $scope.sortOrder = "alpha";
+    $scope.reverseSort = false;
     
-    var watchMen = ['packTitleFilterKeyword', 'artistFilterKeyword', 'songTitleFilterKeyword', 'difficultyFilterKeyword', 'ratingFilterKeyword', 'stepArtistFilterKeyword', 'fgChangesFilterKeyword', 'bgChangesFilterKeyword', 'bpmChangesFilterKeyword', 'modeFilterKeyword'];
+    var watchMen = ['packTitleFilterKeyword', 'artistFilterKeyword', 'songTitleFilterKeyword', 'difficultyFilterKeyword', 'ratingFilterKeyword', 'stepArtistFilterKeyword', 'fgChangesFilterKeyword', 'bgChangesFilterKeyword', 'bpmChangesFilterKeyword', 'modeFilterKeyword', 'sortOrder', 'reverseSort'];
     $scope.$watchGroup(watchMen, function(newValues, oldValues) {
         applyFilters();
     });
@@ -126,7 +128,42 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     
     var applyFilters = function()
     {
-        $scope.filteredPackList = filterFilter(filterFilter($scope.packList, packTitleFilter), simfileFilter);
+        $scope.filteredPackList = filterFilter(filterFilter($scope.packList, packTitleFilter), simfileFilter).sort(getSortFunction($scope.sortOrder, $scope.reverseSort));
+    };
+    
+    var getSortFunction = function(order, reverse)
+    {
+        reverse = reverse ? -1 : 1;
+        switch (order)
+        {
+            // Simple alpha numeric sort. 
+            case "alpha":
+                return function (packA, packB) 
+                {
+                    var a = packA.title.toLowerCase();
+                    var b = packB.title.toLowerCase();
+                    if (a === b)
+                        return 0; 
+                    
+                    if (typeof a === typeof b)
+                        return a < b ? -1*reverse : 1*reverse; 
+                    
+                    return typeof a < typeof b ? -1*reverse : 1*reverse;
+                }
+                
+            case "chrono":
+                return function(packA, packB)
+                {
+                    //XXX: lol i'm sorry
+                    var dateA = Date.parse(packA.uploaded.replace(/th|st|nd|rd/g, ''));
+                    var dateB = Date.parse(packB.uploaded.replace(/th|st|nd|rd/g, ''));
+                    
+                    if(dateA === dateB)
+                        return 0
+                    
+                    return dateA > dateB ? -1*reverse : 1*reverse;
+                };
+        }
     };
 
     SimfileService.getPacks().then(function(packs)
@@ -150,7 +187,7 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
             $scope.pageSize = UiSettingsService.getDirective('simfilesPerPageAuto') ? Math.floor(($window.innerHeight - 280)/40 - 1) : UiSettingsService.getDirective('simfilesPerPage');
             $scope.currentPage = 1;
             $scope.packList = packs;
-            $scope.filteredPackList = packs;
+            $scope.filteredPackList = packs.sort(getSortFunction($scope.sortOrder, $scope.reverseSort));
             
             for(var i =0; i<packs.length; i++)
             {
