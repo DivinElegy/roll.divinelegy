@@ -129,7 +129,8 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     
     var applyFilters = function()
     {
-        $scope.filteredPackList = filterFilter(filterFilter($scope.packList, packTitleFilter), simfileFilter).sort(getSortFunction($scope.sortOrder, $scope.reverseSort));
+        $scope.filteredPackList = filterFilter(filterFilter($scope.packList, packTitleFilter), simfileFilter);
+        $scope.filteredPackList && $scope.filteredPackList.sort(getSortFunction($scope.sortOrder, $scope.reverseSort));
     };
     
     var getSortFunction = function(order, reverse)
