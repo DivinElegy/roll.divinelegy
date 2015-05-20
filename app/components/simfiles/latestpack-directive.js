@@ -89,6 +89,11 @@ directive('latestPack', ['rockEndpoint', '$http', 'UserService', 'HelloService',
                    });
                 }
                 
+                for (var i=0; i<$scope.pack.mirrors.length; i++)
+                {
+                    $scope.pack.mirrors[i].source = $scope.pack.mirrors[i].source.replace("Stepmania Online", "SM Online");
+                }
+                
                 $rootScope.$$phase || $rootScope.$apply();
             });
         }
