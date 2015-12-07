@@ -14,14 +14,13 @@ angular.module("DivinElegy.pages.packs", ["DivinElegy.components.simfiles","Divi
     $scope.bgChangesFilterKeyword = 'Any';
     $scope.bpmChangesFilterKeyword = 'Any';
     $scope.modeFilterKeyword = 'Any';
-    $scope.packList = [];
+    $scope.packList = false;
     $scope.filteredPackList = [];
     $scope.allContributors = [];
     $scope.allSongTitles = [];
     $scope.allSongArtists = [];
     $scope.sortOrder = "alpha";
     $scope.reverseSort = false;
-    $scope.packList = false;
     
     var watchMen = ['packTitleFilterKeyword', 'artistFilterKeyword', 'songTitleFilterKeyword', 'difficultyFilterKeyword', 'ratingFilterKeyword', 'stepArtistFilterKeyword', 'fgChangesFilterKeyword', 'bgChangesFilterKeyword', 'bpmChangesFilterKeyword', 'modeFilterKeyword', 'sortOrder', 'reverseSort'];
     $scope.$watchGroup(watchMen, function(newValues, oldValues) {
