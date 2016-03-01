@@ -85,3 +85,17 @@ border-radius: 4px;
 a.btn-social:hover {
     text-decoration: none;
 }
+
+.btn-link {
+    color: #FFB122;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-link:hover,.btn-link:focus {
+    text-decoration:underline;
+}
+
+.btn-link.ngTruncateToggleText {
+    margin-left: 5px;
+}

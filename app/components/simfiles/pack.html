@@ -6,7 +6,7 @@
     </tr>
     <tr>
         <th>Contributors:</th>
-        <td>{{contributors}}</td>
+        <td ng-text-truncate="contributors" ng-tt-chars-threshold="100" ng-tt-more-label="More" ng-tt-less-label="Less"></td>
     </tr>
     <tr><td>&nbsp;</td></tr>
     <tr ng-if="pack.size">
